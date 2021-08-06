@@ -1,0 +1,34 @@
+set cut_paste_input [stack 0]
+version 12.1 v3
+BackdropNode {
+ inputs 0
+ name GetData2
+ tile_color 0x56822bff
+ label "Data - \"\[value result_data]\" \n"
+ note_font "DejaVu Sans Bold Italic"
+ note_font_size 20
+ selected true
+ xpos 35918
+ ypos -971
+ bdwidth 169
+ bdheight 163
+ z_order 5
+ addUserKnob {20 User}
+ addUserKnob {6 is_data_get l DataGet +INVISIBLE +STARTLINE}
+ addUserKnob {4 cu_mode l Mode M {Get Push ""}}
+ addUserKnob {1 proj l Project}
+ addUserKnob {1 group_name l "Group Name" -STARTLINE}
+ addUserKnob {22 where_am_i l "Where am I" -STARTLINE T "import os\nimport sys\n\n\nimport cooper_monitors as cu_moni\nimport cooper_init as cu_init\n\nimport json\nimport re\n\n\n\n\nscript_name=nuke.root().knob('name').value()\n\n\nnode=nuke.thisNode()\n#node=nuke.selectedNode()\n\nwhere_am_i= cu_moni.where_am_i(os.path.dirname(script_name))\nif where_am_i != \{\} :\n    node.knob('proj').setValue(where_am_i\['PRJ'])\n    node.knob('group_name').setValue(where_am_i\['GROUP'])\nelse:\n    node.knob('proj').setValue('not_found')\n    node.knob('group_name').setValue('not_found')\n"}
+ addUserKnob {1 result_data l "Result Data"}
+ addUserKnob {22 get_data l "Get\\Update Data" -STARTLINE T "import cooper_data as cu_dat\nimport cooper_init as cu_init\n\nimport json\nimport nuke\nimport re\nimport os\nimport nukescripts\n\ndef push(panel,in_node,in_dict,in_ver):\n    res=panel.knobs()\['Get'].value()\n    in_node.knob('result_data').setValue(res)\n    in_node.knob('cu_info').setValue(str(in_dict\[res]))\n    in_node.knob('version_info').setValue(str(in_ver\[res]))\n    panel.finishModalDialog(True)\n    \n\ninit_cuper = cu_init.Cooper_Globals()    \ncu_proj = init_cuper\['cooper_proj']\n\ncu_dict=\{\}\ncu_ver=\{\}\n\ncu_objects=\[]\n\nnode=nuke.thisNode()\n#node=nuke.selectedNode()\nmy_name=node.name()\ngroup=node.knob('group_name').value()\nproj=node.knob('proj').value()\nmode=node.knob('cu_mode').value()\nres_data=node.knob('result_data').value()\n\ncu_moni = cu_proj + '/' + proj + '/' + group\nif not os.path.exists(cu_moni):\n    os.makedirs(cu_moni)\n\n\ncu_obj=\[]\n\nif res_data=='':\n    cu_obj=cu_dat.GetObjects(group , proj , mode)\nelse:\n    cu_obj.append(cu_dat.UpdateObjects(group , proj ,mode,res_data))\n\nprint cu_obj\ncu_out_arr=\[]\nif cu_obj != \[''] :\n    for cu_it in cu_obj:\n    \n        cu_arr=cu_it.split('::Keys::')\n        print cu_arr\n        cu_out_arr.append(cu_arr\[0])\n        cu_dict\[cu_arr\[0]]=cu_arr\[1]\n        cu_ver\[cu_arr\[0]]=cu_arr\[2]\nelse:\n    print 'No Data'\n\nif res_data=='':\n    mypanel = nukescripts.panels.PythonPanel(group)\n    mypanel.addKnob(nuke.CascadingEnumeration_Knob('Get', 'Get' , cu_out_arr))\n    buttonKnob = nuke.PyScript_Knob('Get This')\n    buttonKnob.setValue('push(mypanel,node,cu_dict,cu_ver)')\n    mypanel.addKnob(buttonKnob)\n    mypanel.showModal()\nelse:\n    node.knob('cu_info').setValue(str(cu_dict\[res_data]))\n    node.knob('version_info').setValue(str(cu_ver\[res_data]))\n"}
+ addUserKnob {1 cu_info l "Multy Data Keys"}
+ addUserKnob {1 version_info l Versions}
+ addUserKnob {22 apply_data l "Apply Data" T "import cooper_data as cu_dat\nimport json\nimport nuke\nimport re\nimport os\nimport nukescripts\n\n\ncu_objects=\[]\n\nnode=nuke.thisNode()\n#node=nuke.selectedNode()\n\n\n\nres_obj=node.knob('result_data').value()\nget_rule=node.knob('get_data_rule').value()\nframe_format=node.knob('frame_format').value()\nproj=node.knob('proj').value()\ngroup=node.knob('group_name').value()\nattrib_apply=node.knob('apply_by_attr').value()\nattrib_mode=node.knob('cu_mode').value()\nmulty_data_str=node.knob('cu_info').value()\nversion_str=node.knob('version_info').value()\n\n\nobjects_branches=res_obj.split('::')\n\n\napp_arr = cu_dat.ApplyData(group , proj , objects_branches\[0] , objects_branches\[1] , get_rule , frame_format ,  attrib_mode , multy_data_str , version_str)\nprint app_arr\n\n\nimport nuke\n\n\n\ncu_objects=\[]\n\n#node=nuke.selectedNode()\n\n\n\nn_x=node.knob(\"xpos\").value()\nn_y=node.knob(\"ypos\").value()\n\n\nbw=120\nnode.knob(\"bdwidth\").setValue(bw)\ni=0\na=0\nfor it in app_arr.keys():\n    node_name=str(node.name())+'_'+str(res_obj)+\"_\"+it\n    my_node=nuke.toNode(node_name)\n\n    if my_node == None:\n        \n        if attrib_mode=='Get':\n            my_node=nuke.createNode('Read')\n        else:\n            my_node=nuke.createNode('Write')\n        my_node\['name'].setValue(node_name)\n        my_node\['first'].setValue(1001)\n        my_node\['last'].setValue(1100)\n        nw=my_node.width()\n        nh=my_node.height() \n        my_node.knob(\"xpos\").setValue(n_x+20+i)\n        my_node.knob(\"ypos\").setValue(n_y+50)\n        \n    i=i+120\n    a=a+1\n    if (my_node.knob(attrib_apply)!=None):\n        my_node.knob(attrib_apply).setValue(app_arr\[it])    \n   \nnode.knob(\"bdwidth\").setValue(bw*a)\n\n\n        \n    " +STARTLINE}
+ addUserKnob {20 low_lewel l "Low Lewel"}
+ addUserKnob {1 get_data_rule l "Get Data Rule" t "LV - last version\nVLD- validated "}
+ get_data_rule vld
+ addUserKnob {1 frame_format l "Frame Format"}
+ frame_format nuke
+ addUserKnob {1 apply_by_attr l "Apply To Attribute"}
+ apply_by_attr file
+}

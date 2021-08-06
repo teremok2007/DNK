@@ -1,0 +1,289 @@
+#main_browser{
+    display: flex;
+    flex-direction:column;
+    background-color: #606060;
+    flex: 0 0 300px;
+    overflow:auto;
+    border: 0px solid;
+    box-shadow: 0px 0px 80px 0px #ffffff;*/
+}
+
+
+
+#right_browser{
+    display: flex;
+    flex-direction:column;
+    z-index: 0;
+    background-color: #606060;
+    flex: 1 0 400px;
+    overflow:auto;
+    border: 0px solid;
+    box-shadow: 0px 0px 80px 0px #ffffff;*/
+}
+
+
+#iterator{
+    background-color: #606060;
+    z-index: 1;
+    overflow: scroll;
+    overflow-x: hidden;
+    flex: 1 0 400px;
+    border: 0px solid;
+    box-shadow: 0px 0px 60px 0px white;*/
+}
+
+#file_browser{
+    display: flex;
+    flex-direction:column;
+    background-color: #606060;
+    overflow:auto;
+    border: 0px solid;
+    display: none;
+}
+
+
+#navi_browser{
+    display: flex;
+    flex-direction:column;
+    background-color: #606060;
+    overflow:auto;
+    border: 0px solid;
+    display: block;
+}
+
+.browser_type{
+    display: flex;
+    flex-direction:row;
+    margin: 2px;
+    border-radius: 3px;
+    background-color: #606060;
+
+}
+
+
+.i_type{
+    display: flex;
+    flex-direction:row;
+    margin: 2px;
+    border-radius: 3px;
+    background-color: #606060;
+
+}
+
+.type_wp{
+
+    margin: 2px;
+    border-radius: 3px;
+    text-align: center;
+    flex: 1 0 120px;
+    background-color: #828282;
+
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+
+}
+
+
+.type_navi{
+
+    margin: 2px;
+    border-radius: 3px;
+    flex: 1 0 120px;
+    text-align: center;
+    background-color: #88c6eb;
+
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+
+}
+
+
+.type_parm{
+
+    margin: 2px;
+    border-radius: 3px;
+    text-align: center;
+    flex: 1 0 120px;
+    background-color: #828282;
+
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+
+}
+
+
+.type_iter{
+
+    margin: 2px;
+    border-radius: 3px;
+    flex: 1 0 120px;
+    text-align: center;
+    background-color: #C7E495;
+
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+
+}
+
+
+.it_start_btn{
+
+    margin: 2px;
+    border-radius: 3px;
+    flex: 1 0 120px;
+    text-align: center;
+    background-color: #EFA614;
+
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    
+
+}
+
+
+
+.folder{
+    display: flex;
+    flex-direction:row;
+    margin: 2px;
+    border-radius: 3px;
+    background-color: #88c6eb;
+
+}
+
+
+.navi_column_folder{
+    white-space: nowrap;
+    margin: 2px;
+    border-radius: 3px;
+    font-size :12px;
+
+
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    background-color: #88c6eb;
+
+}
+
+
+.iterator_folder{
+    white-space: nowrap;
+    margin: 2px;
+    border-radius: 3px;
+    font-size :12px;
+
+
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    background-color: #C7E495;
+
+}
+
+
+
+
+.bwr_folder{
+  white-space: nowrap;
+  margin: 2px;
+  border-radius: 3px;
+  background-color: #828282;
+  font-size :12px;
+
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+}
+
+
+
+
+
+
+
+.file{
+  white-space: nowrap;
+  margin: 2px;
+  border-radius: 3px;
+  background-color: #828282;
+  font-size :12px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+
+.context-menu {
+  display: none;
+  position: absolute;
+  z-index: 10;
+  padding: 2px 0;
+  width: 140px;
+  background-color: #a1a1a1;
+
+
+}
+
+.context-menu--active {
+  display: block;
+}
+
+.context-menu__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.context-menu__item {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.context-menu__item:last-child {
+  margin-bottom: 0;
+}
+
+.context-menu__link {
+  display: block;
+  font-size :12px;
+  padding: 4px 4px;
+  color: #000000;
+  text-decoration: none;
+}
+
+.context-menu__link:hover {
+  color: #000000;
+  background-color: #828282;
+}

@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "revo-tech-studio",
+  "private_key_id": "db2297c4ea3d13070af99ae93c4a080dce35916f",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDE2i0ZtxCiHvFL\nHNuEW6s425n6AN9uUOJtIsGWaVVTgqFnk1HUZ+ML47tle0733Xu7KqLYVaaz7uQB\nZaEWeKmmIU8Ajd3kXqXRLJ4vX/F54gLwRsLSWx4JFm4EJ6ehyr7a4eGo1jmoSWIS\n27mv05GjyW7mRqhcNsc33u5TueB+9C4a4FbLyCIC/k95HEwZbDjuWaWsEPNDvfEQ\n3vI8A5DNQMpUgCLdYKwirzN8BQjMprDYzaB96HhV2CPDgZtRH2ynzGhy1kQn4vAR\nymIzO1/jVzr6y+hBvwpLlNZ2ZwxspZ51Dr0k5oJIYWTpDokQ1af6/2+TIDFzCGBZ\nXaLx7+NhAgMBAAECggEAMAsKfk/sPpD8NWeL2MQRqA0KiZZMcY1KkbWtlxLKmRjU\n4SU2j7cyFc0FB6m+VmanA8FOYKuYxancWk3uMICO8QWIlTtKiCmkYQZ5bdkF44gK\nTQ+MDVBhJnkjrR5rfmRvy5Zc33q3NDACwFUBftzNGvL2vrtIbEcPPH7LXkJLfNgX\nZIGvugcTGfci4uXKD31LBqZc+Q6Bf4dkx1ntRklGMDr0jLz/m8B/CCq/P20/XIA6\n+X1CZUDIl0BAnU+4zbZtgMI50PVZrLlXg/bVhahc5Cn/5yHtPQmN8U3ilIvs5jI9\nonWj4NEnNgxON61PW7FnUpd6+fLWY12LWB9U5J1pRQKBgQD/y1t79r1zUi5DMryo\nF1hZZ1C6mrvD3HjaCSafC0j8i6gvvuyVRIdpnLL2fN6v41jA69RyBmUXGtt6wGei\nRaMDFbPuGn9LvAR40rGdLTpfJggIGTAaHXCGO0zEleC+Fd0CO58rVtOOY0HriEmg\n3Xs/QDf0dlqr18+NQLjjpNsztQKBgQDFArBA2amUmPP7a7sluONRJUrj0ZBtf8y2\nqqd5MgZDrX9JfJA7AIBCE52FQvjdIHL2NU4r1nk3CDJhRorN0+ZpZk9BMwpzfx56\nnmHm3uWc9VRZ87WTZSa7LARzEe3CxXEThCwEmnPdM0nP0Iyl5Ar+qriaWg3+Bs9z\nXsSKnNeUfQKBgQDamyf3PHrSeLRy14SlvzXRSluS7rRzghOCe3mXSOS6eHxnOasl\nMmjr2HCV+UezV/+8+I8aV97DLT/Pm2m2I/9Zno2ket65kdjcjWwf4MxXDsCkcypJ\n10kYXsuP4mss6LB1vRCd0FmDAc8PhO0v3rj66F4pvZBl9k058ctROc3gVQKBgD74\nwQW5jS7mRPZUVRmVo3NIjEuNrLCTbQfmPGnMx5vSVSFUI3X4jwaP5oW2Bn4H5Tc1\niqsQfuZMRG47chqgZMHD5gldGzYXp9Jh1cFJ9fLZqAComZ1nc53YUAPH80uSeLZY\nRQmjpO1Le4hljM9puOn1/9O2fUp5Os4RuJjl0TKxAoGAJsvZfH/RbLZpg6LLaqn1\nlSo9VmlGZVAQ1jOyeanP+NCky9//73rRIPK6CTegaL/HObZcJUjV2G/gJGSd80Wz\nZr8G75XN+bcpMj/bka1vnOUNz3tbq62tQGd2OH8xWAQH0JceJCK+1Z/HE1dc6GAC\nXM6uccuadXxNNjHJrrVYYP4=\n-----END PRIVATE KEY-----\n",
+  "client_email": "revo-studio-tech@revo-tech-studio.iam.gserviceaccount.com",
+  "client_id": "102260213419007246539",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/revo-studio-tech%40revo-tech-studio.iam.gserviceaccount.com"
+}

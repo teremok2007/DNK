@@ -1,0 +1,27 @@
+{
+
+	"name" : "asmbl_import_abc" ,
+    "coord": ["650", "200" ] ,
+    "inputs": [ "asmbl_export_abc"  ] ,
+    "outputs":[ "None" ],
+
+
+
+    "af_parm" : {},
+
+
+    "dbox_get" : ["" ] ,
+    "dbox_push": ["" ] ,
+
+    "disable" : 0 ,
+
+    "frame_range" : [ "1" , "1" , "1" ] ,
+
+    "in" : { },
+
+
+    "command" : "mayapy <<prj_dnk_script>>/maya/asmbl_Import_ABC.py"
+
+
+
+}

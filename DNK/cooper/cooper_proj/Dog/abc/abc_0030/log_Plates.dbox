@@ -1,0 +1,9 @@
+{
+    "valid_version": "000", 
+    "rule" : "R:/01_Projects/<<PROJ>>/production/sequence/<<SEQ>>/<<GROUP>>/plate/{{B1}}/png/v{{V1}}/<<GROUP>>_plate_{{B1}}_v{{V1}}.{{F4}}.png" ,
+
+    "de_rule" : { 
+    "nuke" : {  "v": "vld"  ,   "f": "nk"  ,   "set": {  "simple": ".file"  }   }
+
+    }
+}
