@@ -1,0 +1,3 @@
+
+<<name>>=hou.node('<<node_path>>')
+<<name>>.parm('<<attrx>>').set(<<valuex>>)

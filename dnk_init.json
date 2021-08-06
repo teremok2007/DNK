@@ -1,0 +1,22 @@
+{
+
+
+	"dnk_init" : {
+
+		"dnk_proj"         :   "/dnk_master/dnk_proj/" ,
+		"dnk_user"         :   "/dnk_master/dnk_users/",
+		"dnk_tmp"          :   "/dnk_master/dnk_tmp/",
+
+		"dnk_python"       :   "/dnk_master/dnk_core/python/",
+		"dnk_scripts"      :   "/dnk_master/dnk_core/scripts/",
+
+		"studio_proj"      :   "R:/01_Projects/",
+
+		"credentials_file" :   "/dnk_master/dnk_core/python/revo-tech-studio-db2297c4ea3d.json",
+		"CGRU_LOCATION"    :   "R:/06_Tools/Revo/cgru.3.2.0.windows/cgru.3.2.0/",
+
+		"run_projects"     :    [ "Dog" ]
+	},
+
+
+}

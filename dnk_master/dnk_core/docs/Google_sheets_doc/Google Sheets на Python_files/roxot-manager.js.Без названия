@@ -1,0 +1,22 @@
+(function (c) {
+    if (isEngineInited()){
+        return;
+    }
+
+    let script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.async = 1;
+    script.src = c.managerUrl;
+    script.dataset.roxotInited = 'true';
+
+    let head = document.getElementsByTagName('head')[0];
+    head.insertBefore(script, head.firstChild);
+
+    window.rom = window.rom || {cmd: [], icmd: []};
+    window.rom.icmd = window.rom.icmd || [];
+    window.rom.icmd.push(c);
+
+    function isEngineInited(){
+        return  document.querySelectorAll('[data-roxot-inited]').length;
+    }
+})({"adBlockMode":"iframe","managerUrl":"https:\/\/cdn-plus.roxot-panel.com\/roxot-wrapper\/js\/roxot-common-engine.js?v=s-dea8c780-fdd9-42e0-b41a-01204d4da9e9","wrapperUrl":"https:\/\/cdn-plus.roxot-panel.com\/roxot-wrapper\/js\/roxot-wrapper.js?v=s-dea8c780-fdd9-42e0-b41a-01204d4da9e9","placementConfigTemplate":"https:\/\/cdn-plus.roxot-panel.com\/wrapper-builder\/placement\/__PLACEMENT_ID__?v=d-80207a0a-52e3-4ea2-96ce-1f91cbd90799","isLanguageSpecific":false,"hostConfig":{"habr.com":{"wrapperOptions":[]}},"isBrowserSpecific":false,"isOsSpecific":false,"isDeviceTypeSpecific":false,"dynamicUrlTemplate":"","wrapperConfig":{"engineFileName":"roxot-common-engine.js","prebid":{"adjustment":{"appnexus":0.95,"between":1,"criteo":0.9,"getintent":0.55,"mytarget":0.2,"otm":0.95,"rtbhouse":0.75,"rubicon":1,"sovrn":0.9},"path":"https:\/\/cdn-plus.roxot-panel.com\/roxot-wrapper\/js\/prebid.js?v=s-dea8c780-fdd9-42e0-b41a-01204d4da9e9"},"adfox":{"hb":{"biddersMap":{"betweenDigital":"1471719","myTarget":"1471718","otm":"1471725","segmento":"1496136","hybrid":"1505514","adriver":"1508036","rtbhouse":"1393902","criteo":"1393905","getintent":"1393904","videonow":"1407059"},"timeout":1000}}},"lazyLoading":[]})

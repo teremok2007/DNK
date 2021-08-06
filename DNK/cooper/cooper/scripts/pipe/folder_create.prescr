@@ -1,8 +1,0 @@
-import os
-
-myfolder=str("<<dir_path>>")+str("/")+str("<<dir_name>>")
-
-if not os.path.exists(myfolder):
-    os.makedirs(myfolder)
-
-print myfolder

@@ -1,9 +1,0 @@
-import hou,sys
-
-frameStart = int(sys.argv[1])
-frameEnd = int(sys.argv[2])
-
-hou.hipFile.load("<<scenes>>")
-
-node=hou.node('<<node>>')
-node.cook(force=True,frame_range=(frameStart,frameEnd))
