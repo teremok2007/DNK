@@ -1,13 +1,3 @@
-import os
-def Set_Proxy():
-
-	return 1
-
-
-
-
-
-
 def Nuke_Menu():
 
 
@@ -57,17 +47,16 @@ def Nuke_Menu():
 
 	nukemenu.addCommand('NukeRender', 'nuke.nodePaste("R:/01_Projects/Dog/production/exchange/a_bocharov/DNK/cooper/cooper/gizmos/nuke/Nuke_render.nk")')
 
+import nuke
+lib_path = os.path.abspath('/studio/abc/users/bocharov/cooper/cooper/python')
+sys.path.append(lib_path)
+import af_cooper_actions
+import cooper_init as cu_init
+cu_init.Set_Proxy()
 
 
-def DNK_Globals():
-	init = {}
-	init['cooper_proj']      = 'R:/01_Projects/Dog/production/exchange/a_bocharov/DNK/cooper/cooper_proj/'
-	init['studio_proj']      = 'R:/01_Projects/'
-	init['cooper_user']      = 'R:/01_Projects/Dog/production/exchange/a_bocharov/DNK/cooper/cooper_users/'
-	init['cooper_tmp']       = 'R:/01_Projects/Dog/production/exchange/a_bocharov/DNK/cooper/cooper_tmp/'
-	init['cooper_python']    = 'R:/01_Projects/Dog/production/exchange/a_bocharov/DNK/cooper/cooper/python/'
-	init['cooper_scripts']   = 'R:/01_Projects/Dog/production/exchange/a_bocharov/DNK/cooper/cooper/scripts/'
-	init['credentials_file'] = 'R:/01_Projects/Dog/production/exchange/a_bocharov/DNK/cooper/cooper/python/revo-tech-studio-db2297c4ea3d.json'
-	init['CGRU_LOCATION']    = 'R:/06_Tools/Revo/cgru.3.2.0.windows/cgru.3.2.0/'
-	init['run_projects']     = [ 'Dog' ]
-	return init
+
+
+
+
+cu_init.Nuke_Menu()

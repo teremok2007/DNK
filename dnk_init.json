@@ -15,8 +15,9 @@
 		"credentials_file" :   "/dnk_master/dnk_core/python/revo-tech-studio-db2297c4ea3d.json",
 		"CGRU_LOCATION"    :   "R:/06_Tools/Revo/cgru.3.2.0.windows/cgru.3.2.0/",
 
-		"run_projects"     :    [ "Dog" ]
-	},
+		"run_projects"     :    [ "Dog" ],
+
+	}
 
 
 }

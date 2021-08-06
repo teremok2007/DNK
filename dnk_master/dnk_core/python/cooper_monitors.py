@@ -7,7 +7,7 @@ import sys
 #sys.path.append(lib_path)
 
 
-import cooper_init as cu_init
+import dnk_init as cu_init
 
 import json
 import re

@@ -4,9 +4,9 @@ lib_path = os.path.abspath('/studio/abc/users/bocharov/cooper/cooper/python/')
 sys.path.append(lib_path)
 import subprocess
 import json
-import cooper_init
+import dnk_init
 
-cooper_init.Set_Proxy()
+dnk_init.Set_Proxy()
 
 cooper_globals = init.Cooper_Globals()
 

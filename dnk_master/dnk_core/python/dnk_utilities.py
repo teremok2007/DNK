@@ -3,7 +3,7 @@ from __future__ import with_statement
 import re
 import os
 import sys
-import cooper_init
+import dnk_init
 import subprocess
 import json
 
@@ -73,7 +73,7 @@ def re_script( txt , node , sheet , sheet_it):
             else:
                 ### FIND PROJ _init_ NODE ################################################
                 print (' Attr Not Fount in GROUP _init_ File --> Find in PROJ _init_ file')
-                init=cooper_init.Cooper_Globals()
+                init=dnk_init.Cooper_Globals()
                 cu_proj_path=init['cooper_proj']+'/'
                 cu_proj_path=cu_proj_path.replace('//','/')
                 prj_path=cu_proj_path + node_path.replace(cu_proj_path,'').split('/')[0]
@@ -165,7 +165,7 @@ def re_attribute( in_text , nodeb , mode , sheet , sheet_it):
                     else:
                         ### FIND PROJ _init_ NODE################################################
                         print (' Attr Not Fount in GROUP _init_ File --> Find in PROJ _init_ file')
-                        init=cooper_init.Cooper_Globals()
+                        init=dnk_init.Cooper_Globals()
                         cu_proj_path=init['cooper_proj']+'/'
                         cu_proj_path=cu_proj_path.replace('//','/')
                         prj_path=cu_proj_path + node_path.replace(cu_proj_path,'').split('/')[0]
@@ -178,7 +178,7 @@ def re_attribute( in_text , nodeb , mode , sheet , sheet_it):
                 else:
                     ### FIND PROJ _init_ NODE################################################
                     print ('GROUP _init_ File Not Fount --> Find in PROJ _init_ file')
-                    init=cooper_init.Cooper_Globals()
+                    init=dnk_init.Cooper_Globals()
                     cu_proj_path=init['cooper_proj']+'/'
                     cu_proj_path=cu_proj_path.replace('//','/')
                     prj_path=cu_proj_path + node_path.replace(cu_proj_path,'').split('/')[0]
@@ -192,7 +192,7 @@ def re_attribute( in_text , nodeb , mode , sheet , sheet_it):
             else: #mode == "dropnode" :
             #### GET ARRT FROM PROJ _init_ FILE #####
                 
-                init=cooper_init.Cooper_Globals()
+                init=dnk_init.Cooper_Globals()
                 cu_proj_path=init['cooper_proj']+'/'
                 cu_proj_path=cu_proj_path.replace('//','/')
 

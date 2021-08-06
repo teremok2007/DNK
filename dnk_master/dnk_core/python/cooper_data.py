@@ -4,7 +4,7 @@ import os
 import glob
 import re
 import json
-import cooper_init as cu_init 
+import dnk_init as cu_init
 
 def reslash(a):
     b=[]

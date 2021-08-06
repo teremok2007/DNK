@@ -2,7 +2,7 @@ from __future__ import with_statement
 import re
 import os
 import sys
-import cooper_init as cu_init 
+import dnk_init as cu_init
 import time
 import json
 
