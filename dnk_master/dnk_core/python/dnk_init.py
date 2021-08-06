@@ -1,24 +1,30 @@
 import os
-def Set_Proxy():
+import json
+from pathlib import Path
 
+def Set_Proxy():
 	return 1
 
 
 
+def dnk_globals():
 
+	dnk_location_in = str( Path(__file__).parents[3] )
+	dnk_location=dnk_location_in.replace('\\' , '/')
 
+	dnk_init_file = os.path.join(dnk_location, 'dnk_init.json')
+	print(dnk_init_file)
 
-
-
-def DNK_Globals():
 	init = {}
-	init['cooper_proj']      = 'R:/01_Projects/Dog/production/exchange/a_bocharov/DNK/cooper/cooper_proj/'
-	init['studio_proj']      = 'R:/01_Projects/'
-	init['cooper_user']      = 'R:/01_Projects/Dog/production/exchange/a_bocharov/DNK/cooper/cooper_users/'
-	init['cooper_tmp']       = 'R:/01_Projects/Dog/production/exchange/a_bocharov/DNK/cooper/cooper_tmp/'
-	init['cooper_python']    = 'R:/01_Projects/Dog/production/exchange/a_bocharov/DNK/cooper/cooper/python/'
-	init['cooper_scripts']   = 'R:/01_Projects/Dog/production/exchange/a_bocharov/DNK/cooper/cooper/scripts/'
-	init['credentials_file'] = 'R:/01_Projects/Dog/production/exchange/a_bocharov/DNK/cooper/cooper/python/revo-tech-studio-db2297c4ea3d.json'
-	init['CGRU_LOCATION']    = 'R:/06_Tools/Revo/cgru.3.2.0.windows/cgru.3.2.0/'
-	init['run_projects']     = [ 'Dog' ]
+	with open(dnk_init_file) as f:
+		init = json.load(f)
+
+	init["dnk_proj"] = dnk_location + "/dnk_master/dnk_proj/"
+	init["dnk_user"] = dnk_location + "/dnk_master/dnk_users/"
+	init["dnk_python"] = dnk_location + "/dnk_master/dnk_core/python/"
+	init["dnk_scripts"] = dnk_location + "/dnk_master/dnk_core/scripts/"
+
 	return init
+
+a=dnk_globals()
+print(a["dnk_user"])
