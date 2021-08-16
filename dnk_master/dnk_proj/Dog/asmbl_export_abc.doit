@@ -10,8 +10,8 @@
     "af_parm" : {},
 
 
-    "dbox_get" : [ ] ,
-    "dbox_push": [ ] ,
+    "dbox_get" : [] ,
+    "dbox_push": [ "/assets/char/<<main.E:>>.anim_abc[anim_maya]" ] ,
 
     "disable" : 0 ,
 

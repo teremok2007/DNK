@@ -2,7 +2,7 @@ import os
 import json
 from pathlib import Path
 
-def Set_Proxy():
+def dnk_proxy():
 	return 1
 
 
@@ -27,4 +27,4 @@ def dnk_globals():
 	return init
 
 a=dnk_globals()
-print(a["dnk_user"])
+print(a)

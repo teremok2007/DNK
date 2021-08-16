@@ -1,40 +1,15 @@
-{ 
-    "group_mask" : [ "R:/01_Projects/{{PROJ}}/production/sequence/{{SEQ}}/{{GROUP}}/{{TYPE}}/"  ] ,
-    "dnk_project_structure"   : [ "PROJ" , "SEQ" , "GROUP" ],
-
-    "workspaces" : { "asset" : "R:/01_Projects/{{PRJ}}/production/assets/{{ASS_TYPE}}/{{ASS_NAME}}/" },
-    
+{
 
 
-    
-    
+    "main_contexts" : {
+          "shots"  : "/{{step:pc0}}/{{seq:0}}/{{shot:1}}/{{task:pc1}}" ,
+          "assets" : "/asset/{{asset_type}}/{{asset_name}}"
+    } ,
+
+    "post_contexts_dir" : "/_post_contexts_",
+
 
     "google_id_map" : { "Dog" : "11gFKJeDQH_RKGgPun3C4gChVeStlAvdGdt5BYGf1nOM"  },
-
-
-
-
-
-    
-
-    "group_rule" : [ "{{PROJ}}" , "{{GROUP}}" ],
-
-    "real_proj_dir" : [ "R:/01_Projects/" ],
-    "asset_dir" : "/production/assets/",
-
-
-    "alembic_export_type" : ["camera" , "object" , "cgdouble" ] ,
-    "maya_studio_project" : ["R:/01_Projects/Dog/production/"] ,
-    "rnd_resolution" : ["2048" , "1152"] ,
-    "task" : [ "assembly" , "character" , "cleanup" , "compositing" , "env" , "fx" , "hdri" , "layout" , "matchmove" , "plate" , "reference" , "roto" , "sound" , "vehicle"] ,
-
-
-    "task_3d" :  [ "assembly" , "layout" ],
-    "task_2d" :  [ "cleanup" , "compositing", "roto" ],
-    "folder_2d" :  [ "abc" , "blend" , "exr" , "mov" , "mxf" , "nk" , "obj" , "precomp" , "work" ],
-
-    "items_3d" :  [ "camera" , "cgdouble" , "object" , "props" , "env" , "ground" , "fx" , "vehicle" , "characters" ],
-    "items_2d" :  [ "camera" , "cgdouble" , "object" , "props" , "env" , "ground" , "fx" , "vehicle" , "characters" , "denoise" , "mblur" ],
 
 
 

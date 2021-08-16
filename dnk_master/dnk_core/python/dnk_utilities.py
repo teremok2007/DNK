@@ -52,9 +52,6 @@ def re_script( txt , node , sheet , sheet_it):
         item=re.sub('>>','',preitem)
 
 
-
-
-
         if (item in mynode_data['in']):
 
             itemval=re_attribute(str(mynode_data['in'][item]), node , str("node"), sheet , sheet_it)
@@ -240,7 +237,9 @@ def re_frame(txt,fr):
         txt = "%0*d" % (padding, frame) 
         txtOut=re.sub(i,txt , txtOut )    
     return txtOut
-    
+
+
+
 def re_iterator(txt,iterator):
 
     r1= re.compile(r'<<PP[^>>]+>>') 
@@ -252,7 +251,6 @@ def re_iterator(txt,iterator):
         txtOut=re.sub(i,txt , txtOut ) 
          
     return txtOut
-
 
 
 def get_command( node , fra , sheet_in, iterator):
