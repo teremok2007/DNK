@@ -4,7 +4,7 @@
 
     "contexts" : {
 
-           "shots"  : "/{{ work=*[!anima,!render] }}/{{ seq=* }}/shots/{{ shot=* }}/steps/{{ step=* }}/tasks/{{ task=* }}/"
+           "shots"  : "/{{ work=[anima,render] }}/{{ seq=[*] }}/shots/{{ shot=[*] }}/steps/{{ step=[*] }}/tasks/{{ task=[*] }}/"
     } ,
 
     "dnk_context_map" : {

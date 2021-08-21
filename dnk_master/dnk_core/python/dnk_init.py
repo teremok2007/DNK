@@ -19,7 +19,7 @@ def dnk_globals():
 	with open(dnk_init_file) as f:
 		init = json.load(f)
 
-	init["dnk_proj"] = dnk_location + "/dnk_master/dnk_proj/"
+	init["dnk_proj_root"] = dnk_location + "/dnk_master/dnk_proj/"
 	init["dnk_user"] = dnk_location + "/dnk_master/dnk_users/"
 	init["dnk_python"] = dnk_location + "/dnk_master/dnk_core/python/"
 	init["dnk_scripts"] = dnk_location + "/dnk_master/dnk_core/scripts/"

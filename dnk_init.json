@@ -2,11 +2,13 @@
 
 
 		"studio_proj"      :   "C:/proj/",
+		"run_projects"     :    [ "Dog" ],
+
 
 		"credentials_file" :   "C:/work/DNK/dnk_master/dnk_core/python/revo-tech-studio-db2297c4ea3d.json",
-		"CGRU_LOCATION"    :   "C:/work/CGRU/cgru.3.2.0/",
+		"CGRU_LOCATION"    :   "C:/work/CGRU/cgru.3.2.0/"
 
-		"run_projects"     :    [ "Dog" ]
+
 
 
 }
