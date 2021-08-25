@@ -1,11 +1,11 @@
-import os
 from pyseq import pyseq
 #import pyseq
 import os 
 import glob
 import re
 import json
-import dnk_init as cu_init
+from DNK.dnk_master.dnk_core.python.dnk_utils import dnk_init as cu_init
+
 
 def reslash(a):
     b=[]

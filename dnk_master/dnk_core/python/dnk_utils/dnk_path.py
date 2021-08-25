@@ -2,6 +2,7 @@ import os
 
 
 class DnkPath():
+
     def __init__(self, init_path):
         self.path = init_path
         pass

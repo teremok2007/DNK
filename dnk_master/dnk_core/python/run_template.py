@@ -4,7 +4,7 @@ lib_path = os.path.abspath('/studio/abc/users/bocharov/cooper/cooper/python/')
 sys.path.append(lib_path)
 import subprocess
 import json
-import dnk_init
+from DNK.dnk_master.dnk_core.python.dnk_utils import dnk_init
 
 dnk_init.Set_Proxy()
 

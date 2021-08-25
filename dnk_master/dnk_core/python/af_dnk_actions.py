@@ -1,8 +1,6 @@
 from __future__ import with_statement
-import re
-import os
 import sys
-import dnk_init as cu_init
+from DNK.dnk_master.dnk_core.python.dnk_utils import dnk_init as cu_init
 import time
 import json
 
@@ -16,7 +14,6 @@ import json
 import dnk_utilities as util
 import os
 import af
-import dnk_data as dnk_data
 
 ###################################Utility##############################
 

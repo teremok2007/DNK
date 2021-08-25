@@ -2,8 +2,7 @@ import httplib2
 import apiclient.discovery
 from oauth2client.service_account import ServiceAccountCredentials	
 import json
-from sys import argv
-import dnk_init as cu_init
+from DNK.dnk_master.dnk_core.python.dnk_utils import dnk_init as cu_init
 import cooper_monitors as cu_moni
 import string
 import google_sheet_get as ggl_get

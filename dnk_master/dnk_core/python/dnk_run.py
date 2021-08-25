@@ -2,10 +2,10 @@
 import os
 import sys
 import json
-import dnk_init
+from DNK.dnk_master.dnk_core.python.dnk_utils import dnk_init
 import google_sheet_get as ggl_get
 
-dnk_globals=dnk_init.dnk_globals()
+dnk_globals= dnk_init.dnk_globals()
 os.environ["CGRU_LOCATION"] = dnk_globals["CGRU_LOCATION"]
 cgru_libs =dnk_globals["CGRU_LOCATION"]+'/lib/python/'
 lib_path = os.path.abspath(cgru_libs)

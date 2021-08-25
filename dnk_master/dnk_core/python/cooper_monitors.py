@@ -1,5 +1,4 @@
 import os
-import sys
 
 #cooper_libs =os.environ['COOPER_LIBS']
 #cooper_libs ='/studio/abc/users/bocharov/cooper/cooper/python/'
@@ -7,7 +6,7 @@ import sys
 #sys.path.append(lib_path)
 
 
-import dnk_init as cu_init
+from DNK.dnk_master.dnk_core.python.dnk_utils import dnk_init as cu_init
 
 import json
 import re

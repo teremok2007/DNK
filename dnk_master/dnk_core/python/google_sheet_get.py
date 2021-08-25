@@ -1,9 +1,7 @@
 import httplib2 
 import apiclient.discovery
-from oauth2client.service_account import ServiceAccountCredentials	
-import json
-from sys import argv
-import dnk_init as cu_init
+from oauth2client.service_account import ServiceAccountCredentials
+from DNK.dnk_master.dnk_core.python.dnk_utils import dnk_init as cu_init
 import cooper_monitors as cu_moni
 import string
 
