@@ -1,7 +1,7 @@
 {
 
 
-		"studio_proj"      :   "C:/proj/",
+		"studio_proj_root"      :   "C:/proj/",
 		"run_projects"     :    [ "Dog" ],
 
 

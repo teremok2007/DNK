@@ -4,23 +4,29 @@
 
     "contexts" : {
 
-           "shots"  : "/{{ work=[anima,render] }}/{{ seq=[*] }}/shots/{{ shot=[*] }}/steps/{{ step=[p0] }}/tasks/{{ task=[p1] }}/"
-    } ,
-
-    "dnk_context_map" : {
-
-           "shots" : [ "/seq/shot/"  , "/step/task/"  ]
+           "shots"  : "/{{ works=[anima,render] }}/{{ seq=[*] }}/shots/{{ shot=[*] }}/steps/{{ step=[*] }}/task/{{ task=[*] }}/"
     } ,
 
 
+    "post_contexts" : {
+
+           "shots"  : "/post_sg/shots/{{ step=[*] }}/{{ task=[*] }}/"
+    } ,
 
 
-    "post_contexts_dir" : "/_post_contexts_",
+    "dnk_contexts_map" : {
+
+           "shots" : [ "/seq/shot"  , "/works/step/task/"  ]
+    } ,
+
+
+
+
+
+
 
 
     "google_id_map" : { "Dog" : "11gFKJeDQH_RKGgPun3C4gChVeStlAvdGdt5BYGf1nOM"  },
-
-
     "in" : {}
 
 

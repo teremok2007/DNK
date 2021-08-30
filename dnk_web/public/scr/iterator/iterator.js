@@ -13,8 +13,8 @@ $(document).ready(function()
         request.setRequestHeader("Content-Type", "application/json");
 
 
-        
-        
+
+
         request.addEventListener("load", function () {
 
             let files = JSON.parse(request.response);
@@ -46,7 +46,7 @@ $(document).ready(function()
                 node.append(dir_box);
 
                 dir.addEventListener("dblclick",function (e){
-                    
+
                     return 1;
 
                 });
@@ -77,7 +77,7 @@ $(document).ready(function()
                     }
                     else if (e.shiftKey){
                       iterator_add_shift_selection(this.id);
-                      
+
                     }
 
                     else {
@@ -105,7 +105,7 @@ $(document).ready(function()
         });
 
 
-        request.send(get_files);
+        //request.send(get_files);
 
 
 

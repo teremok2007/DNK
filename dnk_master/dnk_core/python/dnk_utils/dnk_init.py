@@ -9,7 +9,8 @@ def dnk_proxy():
 
 def dnk_globals():
 
-	dnk_location_in = str(Path(__file__).parents[4])
+	dnk_location_in = str(Path(os.path.realpath(__file__)).parents[4])
+	#print(os.path.realpath(__file__).parent)
 	dnk_location = dnk_location_in.replace('\\', '/')
 
 	dnk_init_file = os.path.join(dnk_location, 'dnk_init.json')

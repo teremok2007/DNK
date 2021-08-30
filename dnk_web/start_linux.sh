@@ -1,6 +1,6 @@
 #!/bin/sh
-PRJ=$(pwd)
+DNK=$(pwd)
 
-export PATH="$PRJ/bin/node-v13.1.0-linux-x64/bin/:$PATH"
+export PATH="$DNK/bin/node-v13.1.0-linux-x64/bin/:$PATH"
 
 node app.js

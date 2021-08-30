@@ -24,10 +24,10 @@ def recursion_list( y , gl_str ,dnk_struct , depth , res , arr ):
 	smask=gl_str[0]+'/'+str(y)+'/'+gl_str[1]
 	#print(smask)
 	depth=depth+1
-    
+
 	xx=dnk_struct[depth]
 	gl_strr=smask.split(str('{{'+xx+'}}'))
-     
+
 	list=os.listdir(gl_strr[0])
 
 	for yyy in list:
