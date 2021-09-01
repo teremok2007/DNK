@@ -1,9 +1,6 @@
 module.exports = {
 
-
-
   get_graph_info: function (resp_out , navi_folder , proj) {
-
 
   	const fs = require('fs')
   	const path = require('path');
@@ -24,17 +21,11 @@ module.exports = {
 			
 			let rawdata = fs.readFileSync(file_path);
 			let doit_data = JSON.parse(rawdata);
-
-			//file_dict[path.parse(file).name]=doit_data;
-
-
 			doit[path.parse(file).name]=doit_data;
 		}
 
 		if (path.extname(file) == ".dbox")
 			dbox.push(path.parse(file).name);
-
-		
 	})
 
 	resp_out["doit_arr"]=doit;
@@ -45,29 +36,15 @@ module.exports = {
   },
 
 
-
-
-
-
-
-
-
-
   no_work: function () {
-
-
-
-    // whatever
+  // whatever
   }
 
-
-
-
-
-
-
-
 };
+
+
+
+
 
 var zemba = function () {
 }

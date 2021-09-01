@@ -24,15 +24,9 @@ var dnk_init_json_path = path.join(__dirname, '..', 'dnk_init.json');
 var dnk_path = path.join(__dirname, '..');
 const dnk_json_init = require(dnk_init_json_path);
 
-
-
 const dnk_python_path = (dnk_path+"/dnk_master/dnk_core/python/").replace(/\\/gi,'/');
 const dnk_project_path = (dnk_path+"/dnk_master/dnk_proj/").replace(/\\/gi,'/');
 const reel_project_path =(dnk_json_init['studio_proj_root']).replace(/\\/gi,'/');
-
-
-
-
 
 
 app.post("/get_files", jsonParser, function (request, response) {
@@ -102,20 +96,26 @@ app.post("/get_iterator", jsonParser, function (request, response) {
     iter_body=request.body;
 
     const iterator_name = iter_body.iterator;
+    const proj = iter_body.proj;
+    const context = iter_body.context;
 
     var out = {};
     var dataToSend='';
-    iter_name=dnk_py_path+'/iterators/'+ iterator_name + '.py';
+    iter_name=dnk_python_path+'/iterators/'+ iterator_name + '.py';
     console.log(iter_name);
-    const python = spawn('python',[iter_name]);
+
+    const python = spawn('python',[iter_name, proj, context]);
+
     python.stdout.on('data', function(data) {
-
         dataToSend = dataToSend+data.toString();
-
-    } )
+    } );
+    python.stderr.on('data', (data) => {
+        console.error(`stderr: ${data}`);
+    });
     python.on('close', (code) => {
     console.log(`child process close all stdio with code ${code}`);
 
+    res_send={};
     if(response) {
         try {
             res_send=JSON.parse(dataToSend);

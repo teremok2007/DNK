@@ -1,0 +1,27 @@
+{
+
+	"name" : "asmbl_export_abc" ,
+    "coord": ["500", "300" ] ,
+    "inputs": [ "" ] ,
+    "outputs":[ "asmbl_import_abc" ],
+
+
+
+    "af_parm" : {},
+
+
+    "dbox_get" : [] ,
+    "dbox_push": [ "/assets/char/<<main.E:>>.anim_abc[anim_maya]" ] ,
+
+    "disable" : 0 ,
+
+    "frame_range" : [ "1" , "1" , "1" ] ,
+
+    "in" : { },
+
+
+    "command" : "mayapy <<prj_dnk_script>>/maya/asmbl_Export_ABC.py"
+
+
+
+}

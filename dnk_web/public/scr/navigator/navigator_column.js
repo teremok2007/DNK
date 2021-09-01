@@ -26,6 +26,18 @@ $(document).ready(function()
             files_array=files.files_arr;
             proj_relative_path=files.root;
             in_depth=files.depth;
+
+            var parent=document.getElementById(files.parent).dataset.id;
+
+
+            if (in_depth>12 && parent) {
+                var out_to_it=parent.replace(/_navi_box/gi,'').split('/').filter(val => val !== "");
+                IteratorUpdate(out_to_it[0], out_to_it[1]);
+            }
+            else{
+                IteratorUpdate('none', 'none');
+            }
+
             dir_array.forEach(dir_in => {
                 let dir = document.createElement('div');
 

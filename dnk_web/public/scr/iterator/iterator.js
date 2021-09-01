@@ -1,12 +1,12 @@
-$(document).ready(function()
-{
+function IteratorUpdate(proj,context){
 
+        console.log("ITERATOR_WORK");
 
 
         project_name="";
         folder_depth=0;
 
-        let get_files = JSON.stringify({ "iterator": "dnk_simple" });
+        let get_files = JSON.stringify({ "iterator": "dnk_main_context_it", "proj":proj, "context":context });
 
         let request = new XMLHttpRequest();
         request.open("POST", "/get_iterator", true);
@@ -20,9 +20,9 @@ $(document).ready(function()
             let files = JSON.parse(request.response);
 
             console.log(files);
-
+            document.getElementById('iterator').innerHTML = "";
             var node = document.getElementById('iterator');
-            iter_array=files.iter;
+            iter_array=files.iter.sort();
 
             n=0;
             iter_array.forEach(dir_in => {
@@ -35,7 +35,7 @@ $(document).ready(function()
                 dir.dataset.open=0;
                 dir.dataset.depth=in_depth;
                 dir.dataset.select=0;
-                dir.innerHTML = "<div> <div class=\"space\" style=\"padding-left:"+in_depth+"px\"><\div> <img src=\"/public/icons/folder/folder-12px.svg\"> " + dir_in +"</div>";
+                dir.innerHTML = "<div> <div class=\"space\" style=\"padding-left:12px\"><\div> <img src=\"/public/icons/folder/folder-12px.svg\"> " + dir_in +"</div>";
                 node.append(dir);
                 n=n+1;
                 let dir_box = document.createElement('div');
@@ -45,30 +45,17 @@ $(document).ready(function()
                 dir_box.dataset.open=0;
                 node.append(dir_box);
 
+
                 dir.addEventListener("dblclick",function (e){
-
                     return 1;
-
                 });
 
-
-
-
-
-
                 dir.addEventListener("click",function (e){
-
-
                     if (e.ctrlKey) {
-
-
                         if (this.dataset.select==0){
                             this.dataset.select=1;
                             this.style.backgroundColor ="#eaeaea";
                             iterator_add_selection(this.id);
-
-
-
                         }
                         else {
                             this.dataset.select=0;
@@ -77,18 +64,12 @@ $(document).ready(function()
                     }
                     else if (e.shiftKey){
                       iterator_add_shift_selection(this.id);
-
                     }
-
                     else {
-
                         iterator_clear_selection();
                         iterator_add_selection(this.id);
                         this.dataset.select=1;
-
                     }
-
-
                 });
 
 
@@ -105,13 +86,7 @@ $(document).ready(function()
         });
 
 
-        //request.send(get_files);
+        request.send(get_files);
 
 
-
-
-
-
-
-
-});
+};

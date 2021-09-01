@@ -3,19 +3,16 @@
 
 
     "contexts" : {
-
            "shots"  : "/{{ works=[anima,render] }}/{{ seq=[*] }}/shots/{{ shot=[*] }}/steps/{{ step=[*] }}/task/{{ task=[*] }}/"
     } ,
 
 
     "post_contexts" : {
-
            "shots"  : "/post_sg/shots/{{ step=[*] }}/{{ task=[*] }}/"
     } ,
 
 
     "dnk_contexts_map" : {
-
            "shots" : [ "/seq/shot"  , "/works/step/task/"  ]
     } ,
 
