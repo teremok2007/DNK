@@ -1,9 +1,9 @@
 {
 
 	"name" : "asmbl_import_abc" ,
-    "coord": ["280", "80" ] ,
-    "inputs": [ "[prj]asmbl_export_abc"  ] ,
-    "outputs":[ "None" ],
+    "coord": ["600", "600" ] ,
+    "inputs": [ "[prj]export_abc"  ] ,
+
 
 
 

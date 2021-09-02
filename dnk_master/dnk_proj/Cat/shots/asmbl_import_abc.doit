@@ -2,7 +2,7 @@
 
 	"name" : "asmbl_import_abc" ,
     "coord": ["250", "300" ] ,
-    "inputs": [ "asmbl_export_abc"  ] ,
+    "inputs": [ "[prj]export_abc"  ] ,
     "outputs":[ "None" ],
 
 

@@ -201,8 +201,6 @@ var Text = fabric.util.createClass(fabric.Text, {
 
 
 
-
-
 function createNode(name , canvas , x , y ) {
 
 
@@ -221,15 +219,16 @@ function createNode(name , canvas , x , y ) {
     input_name= name + '_in';
     output_name= name + '_out';
     
-    inX=x-nodeRadius-inoutRadius;
-    outX=x+nodeRadius+inoutRadius;
+    inY=y-nodeRadius-inoutRadius;
+    outY=y+nodeRadius+inoutRadius;
 
 
-    var input = new inputNode({ name: input_name , left: inX ,top: y , radius: inoutRadius , fill: 'white' , hasBorders: false , hasControls: false  });
-    var output = new outputNode({ name: output_name , left: outX ,top: y , radius: inoutRadius , fill: 'white' , hasBorders: false , hasControls: false  });
+    var input = new inputNode({ name: input_name , left: x ,top: inY , radius: inoutRadius , fill: 'white' , hasBorders: false , hasControls: false  });
+    var output = new outputNode({ name: output_name , left: x ,top: outY , radius: inoutRadius , fill: 'white' , hasBorders: false , hasControls: false  });
     var node = new Node({name: node_name , left: x ,top: y , radius: nodeRadius , fill: '#6dbad1' , hasBorders: false , hasControls: false   });
-    var name_text = new Text( node_name , {left: x ,top: y-20 ,fontSize:15, fill: '#FF7D1E' , textAlign: 'left'});
-
+    var name_text = new Text( node_name , { textAlign: 'left' , left: x ,top: y ,fontSize:15, fill: '#FF7D1E' });
+    bound=name_text.getBoundingRect().width;
+    name_text.left=name_text.left+bound/2+12;
     node.selectable=true;
     input.parent_node = node;
     output.parent_node = node;
@@ -572,11 +571,11 @@ function createArrow(nodeOut , nodeIn , canvas , temporary ) {
     
 
     
-    var x1=nodeIn.left-nodeInRadius-inoutRadius;
-    var y1=nodeIn.top;
+    var x1=nodeIn.left;
+    var y1=nodeIn.top-nodeInRadius-inoutRadius;
     
-    var x2=nodeOut.left+nodeOutRadius+inoutRadius;
-    var y2=nodeOut.top;
+    var x2=nodeOut.left;
+    var y2=nodeOut.top+nodeOutRadius+inoutRadius;
 
     top=(y1+y2)/2;
     left=(x1+x2)/2;

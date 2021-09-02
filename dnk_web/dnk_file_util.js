@@ -52,14 +52,15 @@ module.exports = {
 	all_files_array.forEach(file => {
 		file_path=dnk_project_path+'/'+file;
 		console.log(file_path);
-        refix_file=all_files_array_name[i]
+        prefix_file=all_files_array_name[i]
 		if (path.extname(file) == ".doit"){
 			
 			let rawdata = fs.readFileSync(file_path);
 			let doit_data = JSON.parse(rawdata);
 			//doit[path.parse(file).name]=doit_data;
-			doit[(refix_file+path.parse(file).name)]=doit_data;
-			console.log(path.parse(file).name)
+			doit[(prefix_file+path.parse(file).name)]=doit_data;
+			console.log("ERERERERERRE");
+			console.log((prefix_file+path.parse(file).name));
 		}
 
 		if (path.extname(file) == ".dbox"){

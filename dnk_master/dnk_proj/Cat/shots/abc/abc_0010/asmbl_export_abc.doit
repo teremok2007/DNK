@@ -1,9 +1,9 @@
 {
 
 	"name" : "asmbl_export_abc" ,
-    "coord": ["400", "50" ] ,
-    "inputs": [ "" ] ,
-    "outputs":[ "asmbl_import_abc" ],
+    "coord": ["200", "600" ] ,
+    "inputs": [ "[seq]asmbl_import_abc" ] ,
+
 
     "af_parm" : {},
 
