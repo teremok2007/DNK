@@ -1,6 +1,5 @@
 function IteratorUpdate(proj,context){
 
-        console.log("ITERATOR_WORK");
 
 
         project_name="";

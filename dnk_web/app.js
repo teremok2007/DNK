@@ -17,6 +17,8 @@ app.get('/', (req, res) => {
     //console.log(res)
 });
 const jsonParser = express.json();
+
+
 const fs = require('fs')
 var path = require('path')
 
@@ -27,6 +29,9 @@ const dnk_json_init = require(dnk_init_json_path);
 const dnk_python_path = (dnk_path+"/dnk_master/dnk_core/python/").replace(/\\/gi,'/');
 const dnk_project_path = (dnk_path+"/dnk_master/dnk_proj/").replace(/\\/gi,'/');
 const reel_project_path =(dnk_json_init['studio_proj_root']).replace(/\\/gi,'/');
+
+
+
 
 
 app.post("/get_files", jsonParser, function (request, response) {
@@ -56,13 +61,30 @@ app.post("/get_navi_files", jsonParser, function (request, response) {
 
     var out = {};
 
+    // Create Context Folders If Folders Exists
+    if (navi_body.depth_folder==12){
+
+        proj_init_path=navi_folderPath+'/_init_';
+
+        let init_file = fs.readFileSync(proj_init_path);
+        let init_data = JSON.parse(init_file);
+        let contexts=Object.keys(init_data.contexts);
+
+        contexts.forEach(current_ctx => {
+            make_dir=navi_folderPath+'/' + current_ctx;
+            if (!fs.existsSync(make_dir)){
+                fs.mkdirSync(make_dir);
+            };
+        });
+    }
+
     out['root']=navi_body.directory;
     out['parent']=navi_body.parent_name;
     out['depth']=navi_body.depth_folder;
     out['doit_arr']={};
     out['dbox_arr']=[];
-    console.log(navi_folderPath);
-    fin_out=f_utl.get_graph_info(out,navi_folderPath,dnk_project_path);
+    //console.log(navi_folderPath);
+    fin_out=f_utl.get_graph_info(out,dnk_project_path, navi_body.directory);
 
 
     console.log(fin_out);

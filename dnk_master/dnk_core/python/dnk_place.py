@@ -18,7 +18,7 @@ def iterator_from_context(current_proj, context_name):
 
     dnk_run_projects = dnk_globals["run_projects"]
     if current_proj not in dnk_run_projects:
-        return ['none_iterator']
+        return []
 
 
     init_proj_dict = {}
@@ -28,16 +28,23 @@ def iterator_from_context(current_proj, context_name):
         current_context = init_proj_dict["contexts"][context_name]
         dnk_contexts_map = init_proj_dict["dnk_contexts_map"][context_name]
     else:
-        return ['none_iterator']
+        return ['Context_name_ERROR']
 
-    res = ctx.context_parser_start(studio_proj.to_str(), current_context)
-    dnk_iterator = ctx.context_to_dnk_map(
-        studio_proj.to_str(),
-        current_proj,
-        current_context,
-        context_name,
-        dnk_contexts_map,
-    )
+    try:
+        res = ctx.context_parser_start(studio_proj.to_str(), current_context)
+    except:
+        return ['Get_context_array_ERROR']
+
+    try:
+        dnk_iterator = ctx.context_to_dnk_map(
+            studio_proj.to_str(),
+            current_proj,
+            current_context,
+            context_name,
+            dnk_contexts_map,
+        )
+    except:
+        return ['Create_context_from_map_ERROR']
 
     return dnk_iterator
 

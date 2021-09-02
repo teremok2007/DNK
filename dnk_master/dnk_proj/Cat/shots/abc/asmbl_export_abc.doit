@@ -1,7 +1,7 @@
 {
 
 	"name" : "asmbl_export_abc" ,
-    "coord": ["500", "300" ] ,
+    "coord": ["400", "300" ] ,
     "inputs": [ "" ] ,
     "outputs":[ "asmbl_import_abc" ],
 
