@@ -13,8 +13,10 @@ app.use('/public',express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
     console.log("START");
+    console.log(req);
     res.render('home', {title: 'Greetings form Handlebars'});
-    //console.log(res)
+    console.log("RES");
+    console.log(res);
 });
 const jsonParser = express.json();
 
@@ -28,7 +30,48 @@ const dnk_json_init = require(dnk_init_json_path);
 
 const dnk_python_path = (dnk_path+"/dnk_master/dnk_core/python/").replace(/\\/gi,'/');
 const dnk_project_path = (dnk_path+"/dnk_master/dnk_proj/").replace(/\\/gi,'/');
+const dnk_user_path = (dnk_path+"/dnk_master/dnk_users/").replace(/\\/gi,'/');
 const reel_project_path =(dnk_json_init['studio_proj_root']).replace(/\\/gi,'/');
+
+
+
+
+app.post("/user_validate", jsonParser, function (request, response) {
+    console.log(request.body);
+    if(!request.body) return response.sendStatus(400);
+
+    user_init_path=dnk_user_path+'/_init_';
+    console.log(user_init_path)
+    let user_init_file = fs.readFileSync(user_init_path);
+    let user_init_data = JSON.parse(user_init_file);
+    let user_mails=Object.keys(user_init_data.users_map);
+
+
+    out={name : 'none' , super:'none'};
+
+    body=request.body;
+    mail=body.mail;
+    pass=body.password;
+
+    user_mails.forEach(current_mail => {
+
+        if (mail==current_mail){
+            console.log(mail);
+            var mail_data=user_init_data.users_map[current_mail];
+            password_data=mail_data.password;
+            console.log(password_data);
+            console.log(pass);
+            if (pass==password_data){
+                out={ name : mail_data.name , super : mail_data.super };
+            }
+
+        }
+
+    });
+
+    console.log(out);
+    response.json(out);
+});
 
 
 

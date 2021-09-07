@@ -1,12 +1,6 @@
 { 
-    "users_map" : { "Aleksey.boc"   : { "name" : "A.Bocharov"   , "folder": "A_Bocharov"  },
-    				"Anton.izh"     : { "name" : "A.Izhbaraev"  , "folder": "A_Izhbaraev" },
-    				"Kesha.she"     : { "name" : "I.Shevchenko" , "folder": "I_Shevchenko"},
-    				"Philipp.bye"   : { "name" : "P.Redblackov" , "folder": "P_Redblackov"},
-    				"Maxim.zhe"     : { "name" : "M.Zhernakov"  , "folder": "M_Zhernakov" },
-    				"Ivan.lev"      : { "name" : "I.Levendyan"  , "folder": "I_Levendyan" },
-    				"Artem.tim"     : { "name" : "A.Timofeew"   , "folder": "A_Timofeew"  },
-    				"Sergey.bor"    : { "name" : "S.Borodin"    , "folder": "S_Borodin"   }
-      			} 
+    "users_map" : {	"a"             : { "name" : "A.Bocharov"   , "password" : "a" , "folder_name": "bocharov"  , "super" : "1"},
+                    "t@gmail.com"   : { "name" : "V.Pupkin"   , "password" : "ASDasd123123" , "folder_name": "pupkin"  , "super" : "0"}
+    }
 }
 

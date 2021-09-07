@@ -14,15 +14,13 @@ import re
 
 
 def where_am_i(input_path_str):
-	            
-	            
+
 	out={}            
 
 	data_dict={}
-    
 	group_rule=[]
 	project_str=[]
-    
+
 	init_cuper = cu_init.Cooper_Globals() 
 	proj_json = init_cuper['cooper_proj']
 
@@ -50,7 +48,7 @@ def where_am_i(input_path_str):
 			for mask_it in group_mask:
 
 				arr_d={}
-	            
+
 				mask_arr = mask_it.split('/')
 				strOut=''
 

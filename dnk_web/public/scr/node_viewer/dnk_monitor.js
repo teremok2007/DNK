@@ -18,12 +18,6 @@ fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
 
 
 
-
-
-
-
-
-
 canvas.off('contextmenu');
 
 
@@ -55,37 +49,6 @@ function resizeCanvas() {
   }
   resizeCanvas();
 
-
-
-
-
-/*
-canvas.on('mouse:down', function(opt) {
-  var pointer = canvas.getPointer(opt.e, true);
-  mouseDownPoint = new fabric.Point(pointer.x, pointer.y);
-});
-
-
-canvas.on('mouse:up', function(opt) {
-  mouseDownPoint = null;
-
-});
-
-
-canvas.on('mouse:move', function(opt) {
-
-    var pointer = canvas.getPointer(opt.e, true);
-    var mouseMovePoint = new fabric.Point(pointer.x, pointer.y);
-    var deltaPoint=mouseMovePoint-mouseDownPoint;
-    canvas.relativePan(deltaPoint);
-    mouseDownPoint = mouseMovePoint;
-
-
-    pos = canvas.getPointer(opt.e);
-
-});
-
-*/
 
 
 
@@ -228,17 +191,60 @@ function NodeUpdate(resp){
                 if (nodein != null && nodeout != null){
                 nodein.parent_node.push(nodeout);
                 nodeout.children_node.push(nodein);
-                console.log(nodein);
-                //console.log(input);
+
                     createArrow(  nodeout , nodein  , canvas , 0 );
                 };
             }); 
         };
-            //var nodeA=createNode( file_in , canvas , x , y );
+
         });        
    
 }
 
 
+
+
+function NodeMonitorSaveGraph(){
+    var moni_name=canvas['moni_name']
+    console.log("SaveGraphImWork");
+    console.log(moni_name);
+
+    request_out={}
+    request_body={}
+    nodes=canvas.getObjects().filter(obj => obj.type === 'node');
+    nodes.forEach(cur_node => {
+        console.log(cur_node.name);
+        request_body['coord']=[cur_node.left, cur_node.top ];
+        let ch_name=[];
+        let pr_name=[];
+        var ch_arr=cur_node.children_node;
+        var pr_arr=cur_node.parent_node;
+        console.log(ch_arr);
+        console.log(pr_arr);
+        console.log(ch_arr.lenght);
+        console.log(pr_arr.lenght);
+        ch_arr.forEach(ch_node => {
+            console.log("AAA");
+            console.log(ch_node.name);
+            console.log("BBB");
+            ch_name.push(ch_node.name);
+        });
+
+        pr_arr.forEach(pr_node => {
+            console.log("CCC");
+            console.log(pr_node.name);
+            console.log("DDD");
+            pr_name.push(pr_node.name);
+        });
+
+        request_body['children_node']=ch_name;
+        request_body['parent_node']=pr_name;
+        request_out[cur_node.name]=request_body;
+    })
+    console.log(request_out);
+
+    return nodes;
+
+}
 
 

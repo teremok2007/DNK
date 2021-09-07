@@ -1,0 +1,58 @@
+
+
+.main_menu{
+    display: flex;
+    flex-direction: row ;
+    height: 30px;
+    background-color: #606060;
+
+}
+
+.sign_in{
+    flex: 0 0 100px;
+    display: flex;
+    flex-direction: row ;
+
+    text-align: center;
+    vertical-align: middle;
+    margin-left: auto;
+    border-radius: 6px;
+    height: 24px;
+    background-color: #606060;
+
+}
+
+.sign_in_btn{
+    flex: 0 0 50px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 6px;
+    height: 24px;
+    margin: 0px 10px;
+    background-color: white;
+
+}
+
+.super_level{
+    flex: 0 1 24px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 12px;
+    height: 24px;
+    width : 24px;
+    background-color: white;
+
+}
+
+
+
+.main_menu_btn{
+
+    margin-left: auto;
+    display: flex;
+    height: 24px;
+    width : 24px;
+    background-color: grey;
+    border-radius: 6px;
+
+}

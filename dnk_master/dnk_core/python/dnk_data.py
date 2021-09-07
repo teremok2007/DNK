@@ -1,5 +1,4 @@
 from pyseq import pyseq
-#import pyseq
 import os 
 import glob
 import re
@@ -78,6 +77,7 @@ def GetDataRecursion( out , all_files , pattern , rule_parts , it , rule_parts_l
 
 
 def re_version(version_arr , rule_get , mode , data_dict):
+
 	out=''
 	if mode == 'Push' or mode == 'push':
 		version_arr.sort()
@@ -131,12 +131,11 @@ def GetDataBox( rule , proj_data ):
 	pr = re.findall(r1,rule)
 	
 	for ipr in pr:
-		replace_prepare=str(ipr).replace('<<','')
-		replace_prepare=str(replace_prepare).replace('>>','')
-		rule=rule.replace(str(ipr),str(proj_data['ALL'][replace_prepare][0]))
+		replace_prepare = str(ipr).replace('<<', '')
+		replace_prepare = str(replace_prepare).replace('>>', '')
+		rule = rule.replace(str(ipr), str(proj_data['ALL'][replace_prepare][0]))
 
 
-	#print rule
 
 
 
