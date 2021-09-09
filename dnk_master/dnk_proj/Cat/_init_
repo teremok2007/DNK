@@ -4,6 +4,7 @@
 
     "contexts" : {
            "shots"  : "/{{ works=[anima,render] }}/{{ seq=[*] }}/shots/{{ shot=[*] }}/steps/{{ step=[*] }}/task/{{ task=[*] }}/"
+
     } ,
 
 

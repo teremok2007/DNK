@@ -225,7 +225,7 @@ function createNode(name , canvas , x , y ) {
 
     var input = new inputNode({ name: input_name , left: x ,top: inY , radius: inoutRadius , fill: 'white' , hasBorders: false , hasControls: false  });
     var output = new outputNode({ name: output_name , left: x ,top: outY , radius: inoutRadius , fill: 'white' , hasBorders: false , hasControls: false  });
-    var node = new Node({name: node_name , left: x ,top: y , radius: nodeRadius , fill: '#6dbad1' , hasBorders: false , hasControls: false   });
+    var node = new Node({name: node_name , left: x ,top: y , radius: nodeRadius , fill: '#6dbad1' , hasBorders: false , stroke : '#FF7D1E' , strokeWidth : 3 , hasControls: false   });
     var name_text = new Text( node_name , { textAlign: 'left' , left: x ,top: y ,fontSize:15, fill: '#FF7D1E' });
     bound=name_text.getBoundingRect().width;
     name_text.left=name_text.left+bound/2+12;

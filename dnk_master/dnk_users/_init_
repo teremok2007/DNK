@@ -1,6 +1,6 @@
 { 
-    "users_map" : {	"a"             : { "name" : "A.Bocharov"   , "password" : "a" , "folder_name": "bocharov"  , "super" : "1"},
-                    "t@gmail.com"   : { "name" : "V.Pupkin"   , "password" : "ASDasd123123" , "folder_name": "pupkin"  , "super" : "0"}
+    "users_map" : {	"a"   : { "name" : "A.Bocharov"   , "password" : "a" , "folder_name": "bocharov"  , "super" : "1"},
+                    "z"   : { "name" : "V.Pupkin"   , "password" : "z" , "folder_name": "pupkin"  , "super" : "0"}
     }
 }
 

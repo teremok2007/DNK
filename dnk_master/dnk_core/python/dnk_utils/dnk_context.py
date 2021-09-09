@@ -6,6 +6,12 @@ import re
 
 out_array = set()
 
+def file_to_json(json_path):
+    import json
+    with open(json_path) as f:
+        init_proj_dict = json.load(f)
+    return init_proj_dict
+
 
 def get_context_expression_variable_name(expression_str):
     rl = re.compile(r"{{[^}}]+}}")
@@ -163,3 +169,53 @@ def context_to_dnk_map(
     out_dnk_struct_iter_array = list(set(dnk_struct_iter_array))
 
     return out_dnk_struct_iter_array
+
+
+def get_contexts_from_path(path, proj, dnk_globals):
+
+    dnk_proj_root = dp(dnk_globals["dnk_proj_root"])
+    dnk_proj_ini = dnk_proj_root.join(proj).join('_init_')
+    if os.path.exists(dnk_proj_ini.to_str()):
+        try:
+            init_dict = file_to_json(dnk_proj_ini.to_str())
+        except:
+            return {}
+    else:
+        return {}
+
+    out_dict = {}
+
+    contexts = init_dict['contexts']
+
+    path_array=path.split('/')
+    for cont_it in list(contexts.keys()):
+        out_dict = {}
+        current_context_body = str('/'+contexts[cont_it]+'/').replace('//', '/')
+        print([path, current_context_body])
+        i = 0
+        out_cont={}
+        for it in current_context_body.split('/'):
+            vary_name = get_context_expression_variable_name(it)
+            path_item = path_array[i]
+
+            if path_item == '' or it == '':
+                i = i+1
+                continue
+
+            if vary_name is None and it != path_item:
+                out_cont = {}
+                out_dict = {}
+                break
+            elif vary_name is None and it == path_item:
+                i = i+1
+                continue
+            else:
+                print([it, vary_name, path_item])
+                out_cont[vary_name] = path_item
+            i = i+1
+
+        if out_cont != {}:
+            out_dict[cont_it] = out_cont
+            break
+
+    return out_dict

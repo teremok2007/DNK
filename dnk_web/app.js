@@ -76,6 +76,17 @@ app.post("/user_validate", jsonParser, function (request, response) {
 
 
 
+app.post("/node_save_graph", jsonParser, function (request, response) {
+    console.log(request.body);
+    if(!request.body) return response.sendStatus(400);
+
+    node_graph_info=request.body;
+    response_body=f_utl.save_node_graph(node_graph_info,dnk_project_path)
+    response.json(response_body);
+});
+
+
+
 
 app.post("/get_files", jsonParser, function (request, response) {
     console.log(request.body);

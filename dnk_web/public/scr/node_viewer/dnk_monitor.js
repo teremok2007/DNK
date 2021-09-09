@@ -209,39 +209,54 @@ function NodeMonitorSaveGraph(){
     console.log("SaveGraphImWork");
     console.log(moni_name);
 
-    request_out={}
-    request_body={}
+    var request_graph={}
+    var request_out={}
     nodes=canvas.getObjects().filter(obj => obj.type === 'node');
     nodes.forEach(cur_node => {
         console.log(cur_node.name);
+        var request_body={}
         request_body['coord']=[cur_node.left, cur_node.top ];
-        let ch_name=[];
-        let pr_name=[];
+
+        var ch_name=[];
+        var pr_name=[];
         var ch_arr=cur_node.children_node;
         var pr_arr=cur_node.parent_node;
-        console.log(ch_arr);
-        console.log(pr_arr);
-        console.log(ch_arr.lenght);
-        console.log(pr_arr.lenght);
+
         ch_arr.forEach(ch_node => {
-            console.log("AAA");
-            console.log(ch_node.name);
-            console.log("BBB");
             ch_name.push(ch_node.name);
+
         });
 
         pr_arr.forEach(pr_node => {
-            console.log("CCC");
-            console.log(pr_node.name);
-            console.log("DDD");
             pr_name.push(pr_node.name);
         });
-
+            console.log('PARENT_ARRAY');
+            console.log(pr_name);
+            console.log('CHILD_ARRAY');
+            console.log(ch_name);
         request_body['children_node']=ch_name;
         request_body['parent_node']=pr_name;
-        request_out[cur_node.name]=request_body;
+        request_graph[cur_node.name]=request_body;
     })
     console.log(request_out);
+    request_out['graph']=request_graph;
+    request_out['context']=moni_name;
+
+    let request_str = JSON.stringify(request_out);
+    let request = new XMLHttpRequest();
+    request.open("POST", "/node_save_graph", true);
+    request.setRequestHeader("Content-Type", "application/json");
+
+
+
+
+        request.addEventListener("load", function () {
+        console.log('Save Node Graph Successful')
+        let data = JSON.parse(request.response);
+        console.log(data)
+    });
+
+    request.send(request_str);
 
     return nodes;
 

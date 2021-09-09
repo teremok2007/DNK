@@ -5,6 +5,7 @@ var lvl = document.getElementById("super_level");
 var svgrph = document.getElementById("save_graph");
 var adddoit = document.getElementById("add_doit");
 var user_mode = document.getElementById("user_mode");
+var delete_doit = document.getElementById("delete_doit");
 var left_win = document.getElementById("main_browser");
 var right_win = document.getElementById("right_browser");
 var navi_win = document.getElementById("navigator");
@@ -96,12 +97,14 @@ modal_btn.onclick = function () {
             if (super_in==0){
                 svgrph.style.display="none";
                 adddoit.style.display="none";
-                user_mode.style.display="block";
+                user_mode.style.display="none";
+                delete_doit.style.display="none";
             }
             else{
                 svgrph.style.display="block";
                 adddoit.style.display="block";
                 user_mode.style.display="block";
+                delete_doit.style.display="block";
             }
         }
 
