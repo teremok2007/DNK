@@ -1,8 +1,8 @@
 {
     "name": "asmbl_export_abc",
     "coord": [
-        158.33333333333323,
-        620.6060606060606
+        109.64646464646455,
+        434.2929292929292
     ],
     "inputs": [
         "[seq]asmbl_import_abc",
@@ -11,7 +11,7 @@
     "af_parm": {},
     "dbox_get": [],
     "dbox_push": [
-        "/assets/char/<<main.chars:>>/anim_abc[maya]"
+        "/assets/char/<<iterate(instance,W,#char)>>/anim_abc[maya]"
     ],
     "disable": 0,
     "frame_range": [

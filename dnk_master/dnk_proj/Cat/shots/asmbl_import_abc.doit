@@ -1,1 +1,29 @@
-{"name":"asmbl_import_abc","coord":[466.2727272727273,390.3636363636364],"inputs":["[prj]export_abc","[ctx]asmbl_export_abc"],"outputs":["None"],"af_parm":{},"dbox_get":[""],"dbox_push":[""],"disable":0,"frame_range":["1","1","1"],"in":{},"command":"mayapy <<prj_dnk_script>>/maya/asmbl_Import_ABC.py"}
+{
+    "name": "asmbl_import_abc",
+    "coord": [
+        601.7272727272727,
+        347.6363636363637
+    ],
+    "inputs": [
+        "[prj]export_abc",
+        "[ctx]asmbl_export_abc"
+    ],
+    "outputs": [
+        "None"
+    ],
+    "af_parm": {},
+    "dbox_get": [
+        ""
+    ],
+    "dbox_push": [
+        ""
+    ],
+    "disable": 0,
+    "frame_range": [
+        "1",
+        "1",
+        "1"
+    ],
+    "in": {},
+    "command": "mayapy <<prj_dnk_script>>/maya/asmbl_Import_ABC.py"
+}

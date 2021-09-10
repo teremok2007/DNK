@@ -14,16 +14,17 @@ module.exports = {
 
   	const fs = require('fs')
   	const path = require('path');
+    var flatten = require('flat')
+    var unflatten = require('flat').unflatten
 
-
-
-    dnk_struct_array=[ 'prj' , 'ctx' ];
+    let dnk_struct_array=[ 'prj' , 'ctx' ];
 
   	full_navi_path=dnk_project_path+'/'+ navi_dir
     navi_dir_array=navi_dir.split('/')
     navi_dir_array = navi_dir_array.filter(val => val !== "");
+    current_depth=navi_dir_array.length-1;
 
-    if (navi_dir_array.length>1) {
+    if (current_depth>0) {
         init_path=dnk_project_path+'/'+navi_dir_array[0]+'/_init_';
         if (fs.existsSync(init_path)) {
 	        let proj_init = fs.readFileSync(init_path);
@@ -33,7 +34,9 @@ module.exports = {
 
         }
     }
-
+    max_depth=dnk_struct_array.length-1;
+    console.log('max_depth');
+    console.log(max_depth);
 
     cur_dnk_path='';
     all_files_array=[];
@@ -44,10 +47,17 @@ module.exports = {
         search_dir=dnk_project_path+cur_dnk_path;
         all_files = fs.readdirSync(search_dir , { withFileTypes: true }).filter(d => d.isFile()).map(d => d.name).map(function(a) { return cur_dnk_path +'/'+ a; });
         all_files_names = fs.readdirSync(search_dir , { withFileTypes: true }).filter(d => d.isFile()).map(d => d.name).map(function(a) { return '['+dnk_struct_array[i]+']'; });
+
         all_files_array=all_files_array.concat(all_files);
         all_files_array_name=all_files_array_name.concat(all_files_names);
         i=i+1;
     });
+
+
+
+
+
+
 
 
     dirs = fs.readdirSync(full_navi_path , { withFileTypes: true }).filter(d => d.isDirectory()).map(d => d.name);
@@ -59,25 +69,67 @@ module.exports = {
     const dbox=[];
     const doit={};
     i=0;
-	all_files_array.forEach(file => {
+    for ( a=0 ; a<all_files_array.length ; a++ ){
+
+        file=all_files_array[a];
+	    check_override=file.split(']');
+	    if(check_override.length>1){
+	        i=i+1;
+	        continue;
+	    }
+
 		file_path=dnk_project_path+'/'+file;
-		console.log(file_path);
-        prefix_file=all_files_array_name[i]
-		if (path.extname(file) == ".doit"){
-			
-			let rawdata = fs.readFileSync(file_path);
-			let doit_data = JSON.parse(rawdata);
-			//doit[path.parse(file).name]=doit_data;
-			doit[(prefix_file+path.parse(file).name)]=doit_data;
-			console.log("ERERERERERRE");
-			console.log((prefix_file+path.parse(file).name));
-		}
+
+
+        prefix_file=all_files_array_name[i];
+        clean_prefix=prefix_file.replace('[','').replace(']','');
+        doit_depth=dnk_struct_array.indexOf(clean_prefix);
+
+        if (path.extname(file) == ".doit"){
+
+            let rawdata = fs.readFileSync(file_path);
+            let doit_data = JSON.parse(rawdata);
+            //doit[(prefix_file+path.parse(file).name)]=doit_data;
+            res_data=flatten(doit_data);
+            res_data['over']=0;
+
+            //res_data['depth']=max_depth-(1/max_depth)*(doit_depth);
+            // OVERRIDE SEARCH
+            if (doit_depth < current_depth){
+                res_data['depth']=0.65;
+                var mypath=dnk_project_path+path.dirname(file);
+                for(let it=doit_depth+1 ; it<current_depth+1; it++){
+
+                    mypath=mypath+'/'+navi_dir_array[it];
+                    override_name=mypath+'/'+prefix_file+path.basename(file);
+                    if (fs.existsSync(override_name)){
+                        res_data['over']=1;
+
+                        let over_rawdata = fs.readFileSync(override_name);
+                        let over_doit_data = JSON.parse(over_rawdata);
+                        res_over=flatten(over_doit_data);
+                        Object.keys(res_over).forEach(function(key) {
+                          res_data[key]=res_over[key];
+
+
+                        });
+
+
+                    }
+                }
+
+            }
+            doit[(prefix_file+path.parse(file).name)]=unflatten(res_data);
+
+        }
+
+
 
 		if (path.extname(file) == ".dbox"){
 			dbox.push(path.parse(file).name);
 			}
 		i=i+1;
-	})
+	}
 
 	resp_out["doit_arr"]=doit;
 	resp_out["dbox_arr"]=dbox;

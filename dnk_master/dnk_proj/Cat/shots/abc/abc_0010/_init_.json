@@ -1,7 +1,7 @@
 {
     "instance": [
-        "/asset/char/cat:vasia::[1,2][#char,#first]",
-        "/asset/char/cat:masya::[2][#char,#second]",
-        "/asset/props/table:table::[*][#props,#first]"
+        "/asset/char/cat:vasia::[1,2][#char,#first][]",
+        "/asset/char/cat:masya::[2][#char,#second][]",
+        "/asset/props/table:table::[*][#props,#first][]"
     ]
 }

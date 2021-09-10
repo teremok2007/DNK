@@ -1,10 +1,12 @@
 {
     "name": "asmbl_import_abc",
     "coord": [
-        73.31818181818178,
-        293.74242424242397
+        293.7070707070706,
+        408.7979797979795
     ],
-    "inputs": [],
+    "inputs": [
+        "[ctx]asmbl_export_abc"
+    ],
     "outputs": [
         "None"
     ],

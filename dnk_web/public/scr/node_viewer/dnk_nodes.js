@@ -201,10 +201,24 @@ var Text = fabric.util.createClass(fabric.Text, {
 
 
 
-function createNode(name , canvas , x , y ) {
+function createNode(name , canvas , x , y ,override=0 , depth=1 ) {
 
 
 
+    node_h=194;
+    node_s=52;
+    node_v=62;
+    var default_hsl = 'hsl(' + 194 + ', ' + (52) + '%,  ' + (62) + '%)';
+    var node_hsl = 'hsl(' + 194 + ', ' + (52*depth) + '%,  ' + (62*depth) + '%)';
+
+    if(override==0){
+        cant_color=default_hsl;
+
+    }
+    else{
+        cant_color='#FF7D1E';
+
+    }
 
 
 
@@ -225,7 +239,7 @@ function createNode(name , canvas , x , y ) {
 
     var input = new inputNode({ name: input_name , left: x ,top: inY , radius: inoutRadius , fill: 'white' , hasBorders: false , hasControls: false  });
     var output = new outputNode({ name: output_name , left: x ,top: outY , radius: inoutRadius , fill: 'white' , hasBorders: false , hasControls: false  });
-    var node = new Node({name: node_name , left: x ,top: y , radius: nodeRadius , fill: '#6dbad1' , hasBorders: false , stroke : '#FF7D1E' , strokeWidth : 3 , hasControls: false   });
+    var node = new Node({name: node_name , left: x ,top: y , radius: nodeRadius , fill: node_hsl , hasBorders: false , stroke : cant_color , strokeWidth : 3 , hasControls: false   });
     var name_text = new Text( node_name , { textAlign: 'left' , left: x ,top: y ,fontSize:15, fill: '#FF7D1E' });
     bound=name_text.getBoundingRect().width;
     name_text.left=name_text.left+bound/2+12;

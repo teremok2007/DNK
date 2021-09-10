@@ -1,1 +1,27 @@
-{"name":"asmbl_export_abc","coord":[294.4545454545454,319.72727272727275],"inputs":["[prj]asmbl_import_abc"],"outputs":[""],"af_parm":{},"dbox_get":[],"dbox_push":["/assets/char/<<main.chars:>>/anim_abc[maya]"],"disable":0,"frame_range":["1","1","1"],"in":{},"command":"mayapy <<prj_dnk_script>>/maya/asmbl_Export_ABC.py"}
+{
+    "name": "asmbl_export_abc",
+    "coord": [
+        294.4545454545454,
+        319.72727272727275
+    ],
+    "inputs": [
+        "[prj]asmbl_import_abc",
+        "[prj]export_abc"
+    ],
+    "outputs": [
+        ""
+    ],
+    "af_parm": {},
+    "dbox_get": [],
+    "dbox_push": [
+        "/assets/char/<<main.chars:>>/anim_abc[maya]"
+    ],
+    "disable": 0,
+    "frame_range": [
+        "1",
+        "1",
+        "1"
+    ],
+    "in": {},
+    "command": "mayapy <<prj_dnk_script>>/maya/asmbl_Export_ABC.py"
+}

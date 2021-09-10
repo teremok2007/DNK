@@ -18,6 +18,7 @@ fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
 
 
 
+
 canvas.off('contextmenu');
 
 
@@ -160,6 +161,7 @@ function NodeUpdate(resp){
         canvas.clear();
         let files = resp;
 
+
         dir_array=files.dir_arr;
         files_array=Object.keys(files.doit_arr);
         proj_relative_path=files.root;
@@ -169,9 +171,11 @@ function NodeUpdate(resp){
         //createNodes
         files_array.forEach(file_in => {
             coord=files.doit_arr[file_in]['coord'];
+            override=files.doit_arr[file_in]['over'];
+            depth=files.doit_arr[file_in]['depth'];
             var x=parseFloat(coord[0]);
             var y=parseFloat(coord[1]);
-            var nodeA=createNode( file_in , canvas , x , y );
+            var nodeA=createNode( file_in , canvas , x , y ,override , depth );
         });
 
         //createArrows 
