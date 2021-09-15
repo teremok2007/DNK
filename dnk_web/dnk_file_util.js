@@ -185,10 +185,13 @@ module.exports = {
     console.log(struct_dict);
     console.log(struct_depth);
 
+
+
     Object.entries(graph_dict).forEach(([key, value]) => {
         doit_array=key.split(']');
         doit_name=doit_array[1];
         doit_space=doit_array[0].replace('[','');
+
         if (struct_depth[doit_space]==save_depth){
             dbox_path=full_navi_path+'/'+doit_name+'.doit';
             console.log(dbox_path);
@@ -231,9 +234,95 @@ module.exports = {
 
         }
     });
+
+
+
     return graph_info_json;
 
-  }
+  },
+
+
+
+
+
+
+  garbage_collector: function (graph_info_json, dnk_project_path) {
+
+        context=graph_info_json['context'];
+        graph_dict=graph_info_json['graph'];
+
+        const fs = require('fs');
+        const path = require('path');
+        var glob = require('glob');
+
+
+        dnk_struct_array=[ 'prj' , 'ctx' ];
+
+        full_navi_path=dnk_project_path+'/'+ context;
+        navi_dir_array=context.split('/');
+        navi_dir_array = navi_dir_array.filter(val => val !== "");
+
+        if (navi_dir_array.length>1) {
+            init_path=dnk_project_path+'/'+navi_dir_array[0]+'/_init_';
+            if (fs.existsSync(init_path)) {
+                let proj_init = fs.readFileSync(init_path);
+                let init_data = JSON.parse(proj_init);
+                dnk_contexts_map=init_data['dnk_contexts_map'][navi_dir_array[1]][0].split('/').filter(val => val !== "");
+                dnk_struct_array=dnk_struct_array.concat(dnk_contexts_map);
+
+            }
+        }
+
+        var struct_dict={};
+        var struct_depth={};
+        i=0;
+        navi_dir_array.forEach(current_dir => {
+            struct_dict[dnk_struct_array[i]]=current_dir;
+            struct_depth[dnk_struct_array[i]]=i;
+            i=i+1;
+        });
+
+        save_depth = navi_dir_array.length-1;
+
+
+        Object.entries(graph_dict).forEach(([key, value]) => {
+            doit_array=key.split(']');
+            doit_name=doit_array[1];
+            doit_space=doit_array[0].replace('[','');
+
+            if (struct_depth[doit_space]==save_depth){
+                dbox_path=full_navi_path+'/'+doit_name+'.doit';
+                console.log('GARBAGE');
+                //console.log(dbox_path);
+                //console.log(graph_info_json['graph'][key]);
+                glob_overrides=full_navi_path+'/[*'
+                glob(glob_overrides, function(err, files) {
+                    console.log(files);
+                    files.forEach(over_file =>{
+                        let override_file = fs.readFileSync(over_file);
+                        let over_data = JSON.parse(override_file);
+                        console.log(over_data);
+                    });
+                });
+
+            }
+        });
+
+        return 1;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

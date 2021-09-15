@@ -81,7 +81,8 @@ app.post("/node_save_graph", jsonParser, function (request, response) {
     if(!request.body) return response.sendStatus(400);
 
     node_graph_info=request.body;
-    response_body=f_utl.save_node_graph(node_graph_info,dnk_project_path)
+    f_utl.garbage_collector(node_graph_info,dnk_project_path);
+    response_body=f_utl.save_node_graph(node_graph_info,dnk_project_path);
     response.json(response_body);
 });
 

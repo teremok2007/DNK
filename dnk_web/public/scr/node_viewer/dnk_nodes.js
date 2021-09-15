@@ -6,6 +6,7 @@ var Node = fabric.util.createClass(fabric.Circle, {
     options || (options = { });
 
     this.callSuper('initialize', options);
+    this.set('color_hsl', options.input || []);
     this.set('input', options.input || []);
     this.set('output', options.output || []);
     this.set('children_node', options.children_node || []);
@@ -16,6 +17,7 @@ var Node = fabric.util.createClass(fabric.Circle, {
 
     toObject: function() {
         return fabric.util.object.extend(this.callSuper('toObject'), {
+        color_hsl: this.get('color_hsl'),
         input: this.get('input'),
         output: this.get('output'),   
         children_node: this.get('children_node'),
@@ -201,15 +203,14 @@ var Text = fabric.util.createClass(fabric.Text, {
 
 
 
-function createNode(name , canvas , x , y ,override=0 , depth=1 ) {
+function createNode(name , canvas , x , y ,override=0 , depth=1 , color_hsl=[194,52,62] ) {
 
+    var h=color_hsl[0];
+    var s=color_hsl[1]*depth*depth;
+    var l=color_hsl[2]*depth;
 
-
-    node_h=194;
-    node_s=52;
-    node_v=62;
-    var default_hsl = 'hsl(' + 194 + ', ' + (52) + '%,  ' + (62) + '%)';
-    var node_hsl = 'hsl(' + 194 + ', ' + (52*depth) + '%,  ' + (62*depth) + '%)';
+    var default_hsl = 'hsl(' + color_hsl[0] + ', ' + (color_hsl[1]) + '%,  ' + (color_hsl[2]) + '%)';
+    var node_hsl = 'hsl(' + h + ', ' + s + '%,  ' + l + '%)';
 
     if(override==0){
         cant_color=default_hsl;
@@ -243,6 +244,8 @@ function createNode(name , canvas , x , y ,override=0 , depth=1 ) {
     var name_text = new Text( node_name , { textAlign: 'left' , left: x ,top: y ,fontSize:15, fill: '#FF7D1E' });
     bound=name_text.getBoundingRect().width;
     name_text.left=name_text.left+bound/2+12;
+
+    node.color_hsl=[h,s,l];
     node.selectable=true;
     input.parent_node = node;
     output.parent_node = node;
@@ -550,9 +553,11 @@ function selectNode() {
 
 
 function deselectNode() {
-    
-    
-    select_obj_array.set({fill : '#6dbad1'});
+
+    console.log(select_obj_array);
+    var node_color_hsl = 'hsl(' + select_obj_array.color_hsl[0] + ', ' + (select_obj_array.color_hsl[1]) + '%,  ' + (select_obj_array.color_hsl[2]) + '%)';
+    select_obj_array.set({fill : node_color_hsl});
+
     select_obj_array=[];
     
 }

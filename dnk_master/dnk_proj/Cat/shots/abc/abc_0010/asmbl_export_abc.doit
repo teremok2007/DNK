@@ -1,11 +1,10 @@
 {
     "name": "asmbl_export_abc",
     "coord": [
-        109.64646464646455,
-        435.9595959595959
+        84.45454545454537,
+        451.72727272727275
     ],
     "inputs": [
-        "[seq]asmbl_import_abc",
         "[shot]asmbl_import_abc"
     ],
     "af_parm": {},
