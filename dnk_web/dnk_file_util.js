@@ -35,8 +35,8 @@ module.exports = {
         }
     }
     max_depth=dnk_struct_array.length-1;
-    console.log('max_depth');
-    console.log(max_depth);
+    //console.log('max_depth');
+    //console.log(max_depth);
 
     cur_dnk_path='';
     all_files_array=[];
@@ -89,11 +89,12 @@ module.exports = {
 
             let rawdata = fs.readFileSync(file_path);
             let doit_data = JSON.parse(rawdata);
-            //doit[(prefix_file+path.parse(file).name)]=doit_data;
-            res_data=flatten(doit_data);
+
+            //res_data=flatten(doit_data);
+            res_data=doit_data;
             res_data['over']=0;
 
-            //res_data['depth']=max_depth-(1/max_depth)*(doit_depth);
+            console.log(file_path);
             // OVERRIDE SEARCH
             if (doit_depth < current_depth){
                 res_data['depth']=0.65;
@@ -107,19 +108,18 @@ module.exports = {
 
                         let over_rawdata = fs.readFileSync(override_name);
                         let over_doit_data = JSON.parse(over_rawdata);
-                        res_over=flatten(over_doit_data);
-                        Object.keys(res_over).forEach(function(key) {
-                          res_data[key]=res_over[key];
+                        if('inputs' in over_doit_data){
+                            res_data['inputs']= Array.from(new Set( res_data['inputs'].concat(over_doit_data['inputs']) ));
 
-
-                        });
+                        }
+                        else{console.log('NO  INPUUUUUUUT');}
 
 
                     }
                 }
 
             }
-            doit[(prefix_file+path.parse(file).name)]=unflatten(res_data);
+            doit[(prefix_file+path.parse(file).name)]=res_data;
 
         }
 
@@ -180,10 +180,10 @@ module.exports = {
     });
 
     save_depth = navi_dir_array.length-1;
-    console.log(dnk_struct_array);
-    console.log(save_depth);
-    console.log(struct_dict);
-    console.log(struct_depth);
+    //console.log(dnk_struct_array);
+    //console.log(save_depth);
+    //console.log(struct_dict);
+    //console.log(struct_depth);
 
 
 
@@ -194,7 +194,7 @@ module.exports = {
 
         if (struct_depth[doit_space]==save_depth){
             dbox_path=full_navi_path+'/'+doit_name+'.doit';
-            console.log(dbox_path);
+            //console.log(dbox_path);
             let doit_data={}
             if (fs.existsSync(dbox_path)){
                 let rawdata = fs.readFileSync(dbox_path);
@@ -209,7 +209,7 @@ module.exports = {
 
             var childs=graph_dict[key]['children_node'];
             var parents=graph_dict[key]['parent_node'];
-            console.log(childs,parents);
+            //console.log(childs,parents);
             childs.forEach(child =>{
                 child_array=child.split(']');
                 child_name=child_array[1];
@@ -218,7 +218,21 @@ module.exports = {
                 if (child_depth<save_depth){
                     var override_data={};
                     var override_path=full_navi_path+'/'+child+'.doit';
-                    var override_parents=graph_dict[child]['parent_node'];
+                    var override_parents_in=graph_dict[child]['parent_node'];
+
+                    override_parents=[];
+
+                    override_parents_in.forEach(cur_parent =>{
+                        cur_parent_array=cur_parent.split(']');
+                        cur_parent_name=cur_parent_array[1];
+                        cur_parent_space=cur_parent_array[0].replace('[','');
+                        cur_parent_depth=struct_depth[cur_parent_space];
+
+                        if (cur_parent_depth==save_depth){
+                            override_parents.push(cur_parent);
+                        };
+
+                    });
 
                     override_data['inputs'] = override_parents;
                     fs.writeFileSync(override_path, JSON.stringify(override_data, null, 4));
@@ -228,9 +242,9 @@ module.exports = {
             });
             doit_data['inputs']=parents
 
-            console.log('doit_data');
+            //console.log('doit_data');
             fs.writeFileSync(dbox_path, JSON.stringify(doit_data, null, 4))
-            console.log(doit_data);
+            //console.log(doit_data);
 
         }
     });
@@ -285,28 +299,51 @@ module.exports = {
         save_depth = navi_dir_array.length-1;
 
 
-        Object.entries(graph_dict).forEach(([key, value]) => {
-            doit_array=key.split(']');
-            doit_name=doit_array[1];
-            doit_space=doit_array[0].replace('[','');
 
-            if (struct_depth[doit_space]==save_depth){
-                dbox_path=full_navi_path+'/'+doit_name+'.doit';
-                console.log('GARBAGE');
-                //console.log(dbox_path);
-                //console.log(graph_info_json['graph'][key]);
-                glob_overrides=full_navi_path+'/[*'
-                glob(glob_overrides, function(err, files) {
-                    console.log(files);
-                    files.forEach(over_file =>{
-                        let override_file = fs.readFileSync(over_file);
-                        let over_data = JSON.parse(override_file);
+
+        glob_overrides=full_navi_path+'/[*';
+        files_o=glob.sync(glob_overrides);
+        console.log('files_o');
+        console.log(files_o);
+
+
+
+        files_o.forEach(over_file => {
+            node_name=path.basename(over_file).replace(/\.[^/.]+$/, "");
+            let override_file = fs.readFileSync(over_file);
+            let over_data = JSON.parse(override_file);
+            console.log('over_node_name');
+            console.log(node_name);
+            if('inputs' in over_data){
+                in_arr=over_data['inputs'];
+                in_arr.forEach(inpts => {
+                    node_in_graph=graph_dict[inpts];
+                    children_nodes= node_in_graph['children_node'];
+                    if (children_nodes.indexOf(node_name) > -1){
+                        console.log('Yes Array');
                         console.log(over_data);
-                    });
-                });
+                    }
+                    else{
+                        console.log('No Array');
+                        delete_index=over_data['inputs'].indexOf(inpts);
+                        over_data['inputs'].splice(over_data['inputs'].indexOf(inpts));
+                        if (over_data['inputs'].length==0) {
+                            delete over_data['inputs'];
+                            if(Object.keys(over_data).length === 0){
+                                console.log('REMOVE_FILE_OVERRIDE');
+                                fs.unlinkSync(over_file);
+                            }
+                        }
 
+                    }
+
+                });
             }
         });
+
+
+
+
 
         return 1;
 

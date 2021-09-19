@@ -1,7 +1,0 @@
-{
-    "inputs": [
-        "[prj]asmbl_import_abc",
-        "[prj]export_abc",
-        "[shot]asmbl_import_abc"
-    ]
-}

@@ -1,12 +1,10 @@
 {
     "name": "asmbl_export_abc",
     "coord": [
-        84.45454545454537,
-        451.72727272727275
+        39.20202020202012,
+        -24.444444444444372
     ],
-    "inputs": [
-        "[shot]asmbl_import_abc"
-    ],
+    "inputs": [],
     "af_parm": {},
     "dbox_get": [],
     "dbox_push": [
