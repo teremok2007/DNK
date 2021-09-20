@@ -675,18 +675,40 @@ function deleteArrow(arr_remove) {
         input_node = arr_remove.in_node;
         out_node = arr_remove.out_node;
 
+        console.log('pre_children_node');
+        console.log(input_node.name,out_node.name);
+
 
         del_child = out_node.children_node;
         del_parent= input_node.parent_node;
-       
-        del_child.splice( del_child.indexOf(out_node), 1 );
-        del_parent.splice( del_parent.indexOf(input_node), 1 );
+
+        console.log(del_child.length,del_parent.length);
+
+        for (i=0 ; i<del_child.length ; i++){
+            console.log( out_node.name ,':childs-' ,del_child[i].name);
+            if (del_child[i].name==input_node.name){
+                console.log('REMOVE',del_child[i].name );
+                del_child.splice( i,1 );
+            }
+        }
+        for (i=0;i<del_parent.length;i++){
+            console.log(input_node.name,':parents-', del_parent[i].name);
+            if (del_parent[i].name==out_node.name){
+                console.log('REMOVE',del_parent[i].name );
+                del_parent.splice( i,1 );
+            }
+        }
+        out_node['children_node']=del_child;
+        input_node['parent_node']=del_parent;
+
+        console.log(out_node['children_node']);
+        console.log(input_node['parent_node']);
 
         in_arrows=input_node.arrows;
         out_arrows=out_node.arrows;
 
-        in_arrows.splice( in_arrows.indexOf(arr_remove), 1 );
-        out_arrows.splice( out_arrows.indexOf(arr_remove), 1 );
+        input_node.arrows = in_arrows.splice( in_arrows.indexOf(arr_remove) );
+        out_node.arrows = out_arrows.splice( out_arrows.indexOf(arr_remove) );
 
     canvas.remove(arr_remove);
     
