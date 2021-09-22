@@ -48,7 +48,7 @@ def iterator_from_context(current_proj, context_name):
 
     return dnk_iterator
 
-#  C:/proj/Dog/comp/abc/shots/abc_0010/steps/animation/task/char/my_scene.nk
+
 def context_from_path(path_string):
 
     dnk_globals = dnk_init.dnk_globals()
@@ -60,5 +60,5 @@ def context_from_path(path_string):
     contexts = ctx.get_contexts_from_path(context_path, proj, dnk_globals)
     return contexts
 
-#print(context_from_path('C:/proj/Cat/comp/abc/shots/abc_0010/steps/animation/task/char/my_scene.nk'))
+
 
