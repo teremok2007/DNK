@@ -1,5 +1,34 @@
 $(document).ready(function()
 {
+
+
+            var left_win = document.getElementById("main_browser");
+            var right_win = document.getElementById("right_browser");
+            var navi_win = document.getElementById("navigator");
+            var svgrph = document.getElementById("save_graph");
+            var adddoit = document.getElementById("add_doit");
+            var user_mode = document.getElementById("user_mode");
+            var delete_doit = document.getElementById("delete_doit");
+            var modal = document.getElementById("base_modal");
+
+
+            left_win.style.display="none";
+            right_win.style.display="none";
+            navi_win.style.display="none";
+
+            user_mode.style.display="none";
+            svgrph.style.display="none";
+            adddoit.style.display="none";
+            modal.style.display="none";
+            delete_doit.style.display="none";
+            main_menu.style.display='none';
+
+            var btn = document.getElementById("sign_in_btr");
+            let event = new Event("click");
+            btn.dispatchEvent(event);
+
+
+
             var addEvent = function(object, type, callback) {
                 if (object == null || typeof(object) == 'undefined') return;
                 if (object.addEventListener) {
