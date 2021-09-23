@@ -86,7 +86,7 @@ $(document).ready(function()
                     request.setRequestHeader("Content-Type", "application/json");
 
                     request.send(get_dir);
-                    //alert(new_path);
+
                 });
 
 
@@ -146,27 +146,6 @@ $(document).ready(function()
 
 
         request.send(get_files);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
