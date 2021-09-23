@@ -1,0 +1,10 @@
+{
+    "coord": [
+        806,
+        125.5
+    ],
+    "annotation": "asdfeg",
+    "inputs": [
+        "[prj]export_abc"
+    ]
+}

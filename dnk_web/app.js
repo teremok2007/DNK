@@ -36,6 +36,29 @@ const reel_project_path =(dnk_json_init['studio_proj_root']).replace(/\\/gi,'/')
 
 
 
+app.post("/add_doit", jsonParser, function (request, response) {
+    if(!request.body) return response.sendStatus(400);
+    console.log(request);
+    body=request.body;
+    doit_name=body.doit_name;
+    doit_annotation=body.doit_annotation;
+    doit_coord=body.cam_coord
+    create_doit_path=dnk_project_path+'/'+body.moni_name;
+    out_dict={ "out_doit_name": doit_name, "out_doit_annotation" : doit_annotation , "create_doit_path" : create_doit_path, "dnk_project_path":dnk_project_path , "cam_coord":body.cam_coord };
+    duits=f_utl.add_doit(out_dict)
+    console.log(duits);
+    response.json(duits);
+
+});
+
+
+
+
+
+
+
+
+
 app.post("/user_validate", jsonParser, function (request, response) {
     console.log(request.body);
     if(!request.body) return response.sendStatus(400);

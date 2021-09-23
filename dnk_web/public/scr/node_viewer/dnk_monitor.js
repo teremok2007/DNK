@@ -60,13 +60,13 @@ canvas.on('mouse:move', function(opt) {
 
 
 
-
+/*
 addEventListener("keydown", function(event) {
     if (event.keyCode == 32)
         //document.title=Math.floor(pos.x);
         var nodeA=createNode( Math.floor(pos.x) , canvas , pos.x, pos.y );
 });
-
+*/
 
 
 addEventListener("keydown", function(event) {
@@ -119,7 +119,7 @@ addEventListener("keydown", function(event) {
 
 
 
-
+/*
 addEventListener("keydown", function(event) {
     if (event.keyCode == 89)
 
@@ -127,7 +127,7 @@ addEventListener("keydown", function(event) {
         canvas.freeDrawingBrush.color='red';
         canvas.freeDrawingBrush.width="2";
 });
-
+*/
 
 
 fabric.Canvas.prototype.getItemByName = function(name) {
@@ -182,7 +182,7 @@ function NodeUpdate(resp){
         files_array.forEach(file_in => {
             inputs=files.doit_arr[file_in]['inputs'];
             console.log(inputs);
-            if (inputs != "None"){
+            if (inputs && inputs != []){
             inputs.forEach(input => {
 
                 nodein=canvas.getItemByName(file_in);
@@ -209,7 +209,8 @@ function NodeUpdate(resp){
 
 
 function NodeMonitorSaveGraph(){
-    var moni_name=canvas['moni_name']
+
+    var moni_name=canvas['moni_name'];
     console.log("SaveGraphImWork");
     console.log(moni_name);
 
@@ -261,9 +262,24 @@ function NodeMonitorSaveGraph(){
     });
 
     request.send(request_str);
+    navigator_update(moni_name);
 
     return nodes;
 
 }
 
+var zoom=canvas.getZoom()
+function CenterCoord(){
+   return{
+      x:fabric.util.invertTransform(canvas.viewportTransform)[4]+(canvas.width/zoom)/2,
+      y:fabric.util.invertTransform(canvas.viewportTransform)[5]+(canvas.height/zoom)/2
+   }
+}
 
+function NodeMonitorDnkCanvasInfo(){
+
+    var moni_name=canvas['moni_name'];
+    var cam_coord=[CenterCoord().x,CenterCoord().y];
+    dict_canvas={"moni_name":moni_name ,"cam_coord":cam_coord};
+    return dict_canvas;
+}

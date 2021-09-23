@@ -347,13 +347,42 @@ module.exports = {
 
         return 1;
 
+    },
+
+
+
+
+
+    add_doit: function (doit_data) {
+        const fs = require('fs');
+        const path = require('path');
+        var glob = require('glob');
+
+        var out_doit_data={};
+        var doit_create_path=doit_data.create_doit_path+'/';
+        var dnk_project_path=doit_data.dnk_project_path+'/';
+
+        out_doit_data["coord"]=doit_data.cam_coord;
+        out_doit_data["annotation"]=doit_data.out_doit_annotation
+        if (doit_create_path.replace(/\/+/gi,'/')==dnk_project_path.replace(/\/+/gi,'/')){
+            return "Out project space -> No Create DoIt ";
+        }
+        else{
+            doit_path=doit_create_path.replace(/\/+/gi,'/')+doit_data.out_doit_name+'.doit'
+            if (fs.existsSync(doit_path)){
+                return "File_exist -> No Create DoIt";
+            }
+            else{
+                fs.writeFileSync(doit_path, JSON.stringify(out_doit_data, null, 4))
+                return "Create DoIt successful";
+            }
+
+        }
+
+
+
+
     }
-
-
-
-
-
-
 
 
 
