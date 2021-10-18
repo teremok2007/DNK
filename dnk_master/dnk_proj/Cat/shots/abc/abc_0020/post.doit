@@ -1,0 +1,10 @@
+{
+    "coord": [
+        495.45310245310554,
+        341.49062049062286
+    ],
+    "annotation": "my_poast",
+    "inputs": [
+        "[seq]asset_import"
+    ]
+}

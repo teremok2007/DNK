@@ -8,13 +8,28 @@ var canvas = new fabric.Canvas('canvas',{
     fireMiddleClick: true,
     stopContextMenu: true,
 });
+
+    options = {
+        distance: 50,
+        width: canvas.width,
+        height: canvas.height,
+        param: {
+          stroke: '#ebebeb',
+          strokeWidth: 0.2,
+          selectable: false
+        }
+     },
+
+
+
+
+
 canvas.hoverCursor = 'pointer';
 var pos;
 var mouseDownPoint = null;
 
 
 fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
-
 
 
 
@@ -162,6 +177,7 @@ function NodeUpdate(resp){
         let files = resp;
 
 
+
         dir_array=files.dir_arr;
         files_array=Object.keys(files.doit_arr);
         proj_relative_path=files.root;
@@ -282,4 +298,9 @@ function NodeMonitorDnkCanvasInfo(){
     var cam_coord=[CenterCoord().x,CenterCoord().y];
     dict_canvas={"moni_name":moni_name ,"cam_coord":cam_coord};
     return dict_canvas;
+}
+
+
+function NodeMonitorGetCanvas(){
+    return canvas;
 }
