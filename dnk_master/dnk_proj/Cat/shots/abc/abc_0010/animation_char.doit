@@ -1,0 +1,11 @@
+{
+    "coord": [
+        306.65909090909145,
+        410.21789321789316
+    ],
+    "annotation": "Character Animation",
+    "inputs": [
+        "[seq]asmbl_import_abc",
+        "[shot]MyTestNode"
+    ]
+}
