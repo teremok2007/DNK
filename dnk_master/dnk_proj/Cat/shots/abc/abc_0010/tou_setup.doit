@@ -1,0 +1,11 @@
+{
+    "coord": [
+        692.9472749472754,
+        327.16070041070105
+    ],
+    "annotation": "asddas",
+    "inputs": [
+        "[prj]export_abc",
+        "[seq]my"
+    ]
+}

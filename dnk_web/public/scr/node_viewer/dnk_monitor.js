@@ -176,8 +176,6 @@ function NodeUpdate(resp){
         canvas.clear();
         let files = resp;
 
-
-
         dir_array=files.dir_arr;
         files_array=Object.keys(files.doit_arr);
         proj_relative_path=files.root;
@@ -203,10 +201,6 @@ function NodeUpdate(resp){
 
                 nodein=canvas.getItemByName(file_in);
                 nodeout=canvas.getItemByName(input);
-
-
-
-
 
                 if (nodein != null && nodeout != null){
                 nodein.parent_node.push(nodeout);
@@ -267,10 +261,6 @@ function NodeMonitorSaveGraph(){
     let request = new XMLHttpRequest();
     request.open("POST", "/node_save_graph", true);
     request.setRequestHeader("Content-Type", "application/json");
-
-
-
-
         request.addEventListener("load", function () {
         console.log('Save Node Graph Successful')
         let data = JSON.parse(request.response);

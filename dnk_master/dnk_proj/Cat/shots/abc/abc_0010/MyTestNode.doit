@@ -1,0 +1,11 @@
+{
+    "coord": [
+        474.8492063492068,
+        365.7261904761906
+    ],
+    "annotation": "",
+    "inputs": [
+        "[seq]asset_import",
+        "[seq]my"
+    ]
+}
