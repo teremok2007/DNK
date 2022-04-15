@@ -14,7 +14,7 @@
 
 
     "dnk_contexts_map" : {
-           "shots" : [ "/seq/shot"  , "/works/step/task/"  ]
+           "shots" : [ "/seq/shot/works"  , "/works/step/task/"  ]
     } ,
 
 

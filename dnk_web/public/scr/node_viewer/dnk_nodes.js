@@ -278,26 +278,17 @@ function createNode(name , canvas , x , y ,override=0 , depth=1 , color_hsl=[194
 
     input.on('mousedown', updateInDown);
     output.on('mousedown', updateOutDown);
-
-
     input.on('mouseup', updateInUp);
     output.on('mouseup', updateOutUp);
-
-
-
     node.on('moving', moveNode);
-
     node.on('selected', selectNode);
     node.on('deselected', deselectNode);
-
-
-
-
 
     node.on('mousedown', (event) => {
     if(event.button === 1) {
 
     }
+
     if(event.button === 2) {
         moni_name=canvas['moni_name']
         var sel_node = canvas.getActiveObject();
@@ -359,11 +350,6 @@ function deleteNode(canvas) {
             dcp.splice( dcp.indexOf(del_node), 1 );
  
         });
-
-
-
-        
-
 
         del_input=del_node.input;
         canvas.remove(del_input);

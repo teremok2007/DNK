@@ -1,5 +1,15 @@
 {
-    "valid_version": "001",
-    "rule" : "<<context>>/<<group>>/{{B1}}/png/v{{V1}}/<<GROUP>>_plate_{{B1}}_v{{V1}}.{{F4}}.png",
+	"coord": [-50.974,110.648],
 
+	"rule" : "<<context_file>>/<<char.name>>/{{b1}}/png/v{{v3}}/<<instance>>_plate_{{b1}}_v{{v3}}.{{f}}.png",
+
+	"b" : ["/main" , "/side"],
+
+	"de_rule" : {
+		"maya" : {"v":"pv" , "b":"/main" , "f": "####"   , "set":"<<char.asset>>:<<char.name>>.tx" , "doit":"animation_char"},
+		"nuke" : {"v":"av" , "b":"/main" , "f": "%04d" , "set":"<<char.asset>>.file"  , "doit":"asmbl_import_abc" }
+	} ,
+	
+	"versions" : ["1","2","3"],
+	"approved_versions" : [ "1" , "3" ],
 }
