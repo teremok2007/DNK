@@ -34,7 +34,40 @@ var Node = fabric.util.createClass(fabric.Circle, {
 });
 
 
+var DboxNode = fabric.util.createClass(fabric.Rect, {
 
+    type: 'dbox_node',
+
+    initialize: function(options) {
+    options || (options = { });
+
+    this.callSuper('initialize', options);
+    this.set('color_hsl', options.input || []);
+    this.set('input', options.input || []);
+    this.set('output', options.output || []);
+    this.set('children_node', options.children_node || []);
+    this.set('parent_node', options.parent_node || []);
+    this.set('arrows', options.arrows || []);
+    this.set('misk', options.misk || []);
+    },
+
+    toObject: function() {
+        return fabric.util.object.extend(this.callSuper('toObject'), {
+        color_hsl: this.get('color_hsl'),
+        input: this.get('input'),
+        output: this.get('output'),
+        children_node: this.get('children_node'),
+        parent_node: this.get('parent_node'),
+        arrows: this.get('arrows'),
+        misk: this.get('misk')
+        });
+    },
+
+    _render: function(ctx) {
+    this.callSuper('_render', ctx);
+
+    }
+});
 
 
 
@@ -203,7 +236,7 @@ var Text = fabric.util.createClass(fabric.Text, {
 
 
 
-function createNode(name , canvas , x , y ,override=0 , depth=1 , color_hsl=[194,52,62] ) {
+function createNode(name , canvas , x , y ,override=0 , depth=1 , color_hsl=[194,52,62] ,type_node=0) {
 
     var h=color_hsl[0];
     var s=color_hsl[1]*depth*depth;
@@ -234,13 +267,26 @@ function createNode(name , canvas , x , y ,override=0 , depth=1 , color_hsl=[194
     input_name= name + '_in';
     output_name= name + '_out';
     
-    inY=y-nodeRadius-inoutRadius;
-    outY=y+nodeRadius+inoutRadius;
 
 
-    var input = new inputNode({ name: input_name , left: x ,top: inY , radius: inoutRadius , fill: 'white' , hasBorders: false , hasControls: false  });
-    var output = new outputNode({ name: output_name , left: x ,top: outY , radius: inoutRadius , fill: 'white' , hasBorders: false , hasControls: false  });
-    var node = new Node({name: node_name , left: x ,top: y , radius: nodeRadius , fill: node_hsl , hasBorders: false , stroke : cant_color , strokeWidth : 3 , hasControls: false   });
+
+
+    if(type_node==0){
+        inY=y-nodeRadius-inoutRadius;
+        outY=y+nodeRadius+inoutRadius;
+        var input = new inputNode({ name: input_name , left: x ,top: inY , radius: inoutRadius , fill: 'white' , hasBorders: false , hasControls: false  });
+        var output = new outputNode({ name: output_name , left: x ,top: outY , radius: inoutRadius , fill: 'white' , hasBorders: false , hasControls: false  });
+        var node = new Node({name: node_name , left: x ,top: y , radius: nodeRadius , fill: node_hsl , hasBorders: false , stroke : cant_color , strokeWidth : 3 , hasControls: false , zIndex:5  });
+    }
+    else{
+        inY=y;
+        outY=y;
+        var input = new inputNode({ name: input_name , left: x ,top: inY , radius: inoutRadius , fill: 'white' , hasBorders: false , hasControls: false ,visible: false });
+        var output = new outputNode({ name: output_name , left: x ,top: outY , radius: inoutRadius , fill: 'white' , hasBorders: false , hasControls: false, visible: false  });
+        var node = new DboxNode({name: node_name , left: x ,top: y , height: 15, width: 15, fill: node_hsl , hasBorders: false , stroke : cant_color , strokeWidth : 3 , hasControls: false ,zIndex:5  });
+
+    }
+
     var name_text = new Text( node_name , { textAlign: 'left' , left: x ,top: y ,fontSize:15, fill: '#FF7D1E' });
     bound=name_text.getBoundingRect().width;
     name_text.left=name_text.left+bound/2+12;
@@ -565,13 +611,31 @@ function createArrow(nodeOut , nodeIn , canvas , temporary ) {
     {
         return;
     }
+
+    fill_arrow="white"
+    width_arrow=1
     node_in=nodeIn.input;
     node_out=nodeOut.output;
+    sel=true;
+
+    if(temporary==0){
+        
+        nodeInRadius=nodeIn.radius;
+        nodeOutRadius=nodeOut.radius;
+        inoutRadius=node_in.radius;
+    }
+    else{
+        fill_arrow="#05FA15"
+        if(temporary==2){
+            fill_arrow="#E01700"
+        }
+        width_arrow=0.5
+        nodeInRadius=0
+        nodeOutRadius=0
+        inoutRadius=0;
+        sel=false;
+    }
     
-    nodeInRadius=nodeIn.radius;
-    nodeOutRadius=nodeOut.radius;
-    
-    inoutRadius=node_in.radius;
 
     
 
@@ -587,7 +651,7 @@ function createArrow(nodeOut , nodeIn , canvas , temporary ) {
     var arrow_points= [ x1, y1, x2, y2 ];
     var arrow_name=nodeIn.name+'_'+nodeOut.name;
 
-    var arrow = new Arrow( arrow_points , { name: arrow_name , strokeWidth: 1 , fill: 'white', stroke: 'white', originX: 'center', originY: 'center', hasBorders: false , hasControls: false , selectable : true ,lockMovementX: true , lockMovementY: true, targetFindTolerance: 8 });
+    var arrow = new Arrow( arrow_points , { name: arrow_name , strokeWidth: width_arrow , fill: fill_arrow, stroke: fill_arrow, originX: 'center', originY: 'center', hasBorders: false , hasControls: false , selectable : sel ,lockMovementX: true , lockMovementY: true, targetFindTolerance: 8 });
     arrow.in_node=nodeIn;
     arrow.out_node=nodeOut;
     
@@ -610,7 +674,7 @@ function createArrow(nodeOut , nodeIn , canvas , temporary ) {
 
 
 
-function updateArrow(in_arrow ) {
+function updateArrow(in_arrow) {
     nodeIn=in_arrow.in_node;
     nodeOut=in_arrow.out_node;
     node_in=nodeIn.input;
@@ -618,9 +682,13 @@ function updateArrow(in_arrow ) {
     
     var x1=node_in.left;
     var y1=node_in.top;
-    
     var x2=node_out.left;
     var y2=node_out.top;
+    if (nodeIn.type=='dbox_node'){
+        //Centered by node
+        var x2=nodeOut.left;
+        var y2=nodeOut.top;
+    }
 
     var coord=x1+'_'+y1+'_'+x2+'_'+y2;
 

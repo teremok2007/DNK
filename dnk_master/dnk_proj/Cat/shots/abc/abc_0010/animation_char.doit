@@ -1,11 +1,10 @@
 {
     "coord": [
-        245.9765676412528,
-        485.70910314550446
+        230.36762103230618,
+        593.3220180084193
     ],
     "annotation": "Character Animation",
     "inputs": [
-        "[seq]asmbl_import_abc",
         "[shot]MyTestNode"
     ]
 }

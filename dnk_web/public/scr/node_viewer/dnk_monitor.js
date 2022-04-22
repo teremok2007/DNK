@@ -178,40 +178,90 @@ function NodeUpdate(resp){
 
         dir_array=files.dir_arr;
         files_array=Object.keys(files.doit_arr);
+        dbox_array=Object.keys(files.dbox_arr);
+        console.log('dbox_array');
+        console.log(dbox_array);
         proj_relative_path=files.root;
         in_depth=files.depth;
 
         canvas['moni_name']=proj_relative_path;
-        //createNodes
+        //Doit create
         files_array.forEach(file_in => {
             coord=files.doit_arr[file_in]['coord'];
             override=files.doit_arr[file_in]['over'];
             depth=files.doit_arr[file_in]['depth'];
             var x=parseFloat(coord[0]);
             var y=parseFloat(coord[1]);
-            var nodeA=createNode( file_in , canvas , x , y ,override , depth );
+            color_hsl=[194,52,62]
+            var nodeA=createNode( file_in , canvas , x , y ,override , depth , color_hsl , 0 );
         });
 
-        //createArrows 
+        //DBox Create
+        dbox_array.forEach(file_in => {
+            coord=files.dbox_arr[file_in]['coord'];
+            override=files.dbox_arr[file_in]['over'];
+            depth=files.dbox_arr[file_in]['depth'];
+            var x=parseFloat(coord[0]);
+            var y=parseFloat(coord[1]);
+            color_hsl=[0,100,30]
+            var nodeA=createNode( file_in , canvas , x , y ,override , depth , color_hsl, 1 );
+        });
+
+        //CreateDoitArrows 
         files_array.forEach(file_in => {
             inputs=files.doit_arr[file_in]['inputs'];
             console.log(inputs);
             if (inputs && inputs != []){
-            inputs.forEach(input => {
+                inputs.forEach(input => {
 
-                nodein=canvas.getItemByName(file_in);
-                nodeout=canvas.getItemByName(input);
+                    nodein=canvas.getItemByName(file_in);
+                    nodeout=canvas.getItemByName(input);
 
-                if (nodein != null && nodeout != null){
-                nodein.parent_node.push(nodeout);
-                nodeout.children_node.push(nodein);
+                    if (nodein != null && nodeout != null){
+                        nodein.parent_node.push(nodeout);
+                        nodeout.children_node.push(nodein);
 
-                    createArrow(  nodeout , nodein  , canvas , 0 );
-                };
-            }); 
-        };
+                        createArrow(  nodeout , nodein  , canvas , 0 );
+                    };
+                }); 
+            };
+        })
 
-        });        
+        //CreateDBoxArrows 
+        dbox_array.forEach(file_in => {
+            inputs=[];
+            version=[];
+            for (var rule_name in files.dbox_arr[file_in]['de_rules']) {
+                inputs.push(files.dbox_arr[file_in]['de_rules'][rule_name]['doit']);
+                version.push(files.dbox_arr[file_in]['de_rules'][rule_name]['v']);
+            }
+
+            console.log(inputs);
+            if (inputs && inputs != []){
+                it_ver=0;
+                
+                inputs.forEach(input => {
+                    index=1;
+                    if(version[it_ver]=="push"){
+                        index=2
+                    }
+                    it_ver=it_ver+1;
+
+                    nodein=canvas.getItemByName(file_in);
+                    nodeout=canvas.getItemByName(input);
+
+                    if (nodein != null && nodeout != null){
+                        nodein.parent_node.push(nodeout);
+                        nodeout.children_node.push(nodein);
+
+                        createArrow(nodeout, nodein, canvas, index);
+                    };
+                }); 
+            };
+        }); 
+
+
+               
    
 }
 
@@ -227,11 +277,24 @@ function NodeMonitorSaveGraph(){
     var request_graph={}
     var request_out={}
     nodes=canvas.getObjects().filter(obj => obj.type === 'node');
+    dbox_nodes=canvas.getObjects().filter(obj => obj.type === 'dbox_node');
+
+
+    dbox_nodes.forEach(cur_node => {
+        console.log(cur_node.name);
+        var request_body={}
+        request_body['coord']=[cur_node.left, cur_node.top ];
+        request_body['node_type']='dbox_node';
+        request_body['children_node']=[];
+        request_body['parent_node']=[];
+        request_graph[cur_node.name]=request_body;
+    });
+
     nodes.forEach(cur_node => {
         console.log(cur_node.name);
         var request_body={}
         request_body['coord']=[cur_node.left, cur_node.top ];
-
+        request_body['node_type']='node'
         var ch_name=[];
         var pr_name=[];
         var ch_arr=cur_node.children_node;

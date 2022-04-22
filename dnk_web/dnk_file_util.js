@@ -66,7 +66,7 @@ module.exports = {
     resp_out["files_arr"]=files;
     resp_out["dir_arr"]=dirs;
 
-    const dbox=[];
+    const dbox={};
     const doit={};
     i=0;
     for ( a=0 ; a<all_files_array.length ; a++ ){
@@ -112,7 +112,7 @@ module.exports = {
                             res_data['inputs']= Array.from(new Set( res_data['inputs'].concat(over_doit_data['inputs']) ));
 
                         }
-                        else{console.log('NO  INPUUUUUUUT');}
+                        else{console.log('No Input');}
 
 
                     }
@@ -126,7 +126,49 @@ module.exports = {
 
 
 		if (path.extname(file) == ".dbox"){
-			dbox.push(path.parse(file).name);
+
+            let rawdata = fs.readFileSync(file_path);
+            let dbox_data = JSON.parse(rawdata);
+
+            //res_data=flatten(dbox_data);
+            res_data=dbox_data;
+            res_data['over']=0;
+
+            console.log(file_path);
+            // OVERRIDE SEARCH
+            if (doit_depth < current_depth){
+                res_data['depth']=0.65;
+                var mypath=dnk_project_path+path.dirname(file);
+                for(let it=doit_depth+1 ; it<current_depth+1; it++){
+
+                    mypath=mypath+'/'+navi_dir_array[it];
+                    override_name=mypath+'/'+prefix_file+path.basename(file);
+                    if (fs.existsSync(override_name)){
+                        res_data['over']=1;
+
+                        let over_rawdata = fs.readFileSync(override_name);
+                        let over_doit_data = JSON.parse(over_rawdata);
+                        if('inputs' in over_doit_data){
+                            res_arr=[]
+                            for (var rule_name in res_data['de_rules']) {
+                                res_arr.push(res_data['de_rules'][rule_name]['doit']);
+
+                            }
+                            res_data['inputs']= Array.from(new Set( res_arr ));
+
+                        }
+                        else{console.log('No Input');}
+
+
+                    }
+                }
+
+            }
+            dbox[(prefix_file+path.parse(file).name)]=res_data;
+
+
+
+			//dbox.push(path.parse(file).name);
 			}
 		i=i+1;
 	}
@@ -194,6 +236,11 @@ module.exports = {
 
         if (struct_depth[doit_space]==save_depth){
             dbox_path=full_navi_path+'/'+doit_name+'.doit';
+
+            if(graph_dict[key]['node_type']=='dbox_node'){
+                dbox_path=full_navi_path+'/'+doit_name+'.dbox';
+            }
+            
             //console.log(dbox_path);
             let doit_data={}
             if (fs.existsSync(dbox_path)){
@@ -206,6 +253,12 @@ module.exports = {
 
             doit_data['coord']=graph_dict[key]['coord']
 
+            if(graph_dict[key]['node_type']=='dbox_node'){
+                fs.writeFileSync(dbox_path, JSON.stringify(doit_data, null, 4));
+                return;
+
+            }
+            
 
             var childs=graph_dict[key]['children_node'];
             var parents=graph_dict[key]['parent_node'];
