@@ -25,7 +25,7 @@ def iterator_from_context(current_proj, context_name):
     with open(dnk_proj_init.to_str()) as f:
         init_proj_dict = json.load(f)
     if context_name in init_proj_dict["contexts"]:
-        current_context = init_proj_dict["contexts"][context_name]
+        current_context = init_proj_dict["dnk_contexts_map"][context_name]
         dnk_contexts_map = init_proj_dict["dnk_contexts_map"][context_name]
     else:
         return ['Context_name_ERROR']

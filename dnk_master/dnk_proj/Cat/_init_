@@ -3,30 +3,16 @@
 
 
     "contexts" : {
-           "shots"  : "/{{ works=[anima,render] }}/{{ seq=[*] }}/shots/{{ shot=[*] }}/steps/{{ step=[*] }}/task/{{ task=[*] }}/"
+           "shots"  : "1",
+           "assets"  : "0"
 
-    } ,
-
-
-    "post_contexts" : {
-           "shots"  : "/post_sg/shots/{{ step=[*] }}/{{ task=[*] }}/"
     } ,
 
 
     "dnk_contexts_map" : {
-           "shots" : [ "/seq/shot/works"  , "/works/step/task/"  ]
-    } ,
-
-
-
-
-
-
-
-
-    "google_id_map" : { "Dog" : "11gFKJeDQH_RKGgPun3C4gChVeStlAvdGdt5BYGf1nOM"  },
-    "in" : {}
-
+           "shots" : [ "/seq/shot"  , "/{{seq}}/shots/{{shot}}/" ],
+           "assets" : [ "/type/name"  , "/{{type}}/names/{{name}}/" ]
+    } 
 
 
 }

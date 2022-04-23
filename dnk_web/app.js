@@ -3,6 +3,7 @@ const express = require("express");
 const handlebars = require('express-handlebars');
 var jquery = require('jquery');
 var f_utl = require('./dnk_file_util');
+var sh_utl = require('./dnk_sheet_util');
 const app = express();
 
 app.engine('handlebars', handlebars({defaultLayout: 'main'}));
@@ -108,6 +109,20 @@ app.post("/node_save_graph", jsonParser, function (request, response) {
     response_body=f_utl.save_node_graph(node_graph_info,dnk_project_path);
     response.json(response_body);
 });
+
+
+
+app.post("/add_sheets", jsonParser, function (request, response) {
+    console.log("Create Sheet");
+    console.log(request.body);
+    if(!request.body) return response.sendStatus(400);
+
+    sheet_info=request.body;
+    res=sh_utl.add_sheet(sheet_info,dnk_project_path);
+    console.log(res);
+    response.json(request.body);
+});
+
 
 
 

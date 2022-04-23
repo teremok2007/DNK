@@ -35,8 +35,42 @@ module.exports = {
         }
     }
     max_depth=dnk_struct_array.length-1;
-    //console.log('max_depth');
-    //console.log(max_depth);
+
+
+
+    resp_out["its_fin_context"]=0;
+    if(max_depth==current_depth){
+        //its final context
+        //get all all context objects
+        folder=dnk_project_path;
+        sheets_array=[];
+        filesh=[];
+        a=0
+        for(var i=0; i<navi_dir_array.length;i++){
+            folder=folder+'/'+navi_dir_array[a];
+            filesh=fs.readdirSync(folder , { withFileTypes: true }).filter(d => d.isFile()).map(d => d.name).map(function(a){ if (a.split('.').slice(-1) == "sheet") return (cur_dnk_path +'/'+ a ); });
+            for(var c=0;c<filesh.length;c++){
+                if(filesh[c] !== undefined){
+                    if ((filesh[c].indexOf("[") != -1) && (filesh[c].indexOf("]") != -1)){
+                        sheets_array.push(filesh[c]);
+                    }
+                    else{
+                        sheets_array.push('['+dnk_struct_array[a]+']'+filesh[c].split('/').slice(-1));
+                    }
+                }
+            }
+
+            a=a+1;
+        }
+        console.log("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+        console.log(sheets_array);
+        resp_out["sheets"]=sheets_array;
+        resp_out["its_fin_context"]=1;
+    }
+
+
+
+
 
     cur_dnk_path='';
     all_files_array=[];
@@ -94,7 +128,7 @@ module.exports = {
             res_data=doit_data;
             res_data['over']=0;
 
-            console.log(file_path);
+            //console.log(file_path);
             // OVERRIDE SEARCH
             if (doit_depth < current_depth){
                 res_data['depth']=0.65;
@@ -134,7 +168,7 @@ module.exports = {
             res_data=dbox_data;
             res_data['over']=0;
 
-            console.log(file_path);
+            //console.log(file_path);
             // OVERRIDE SEARCH
             if (doit_depth < current_depth){
                 res_data['depth']=0.65;
@@ -176,7 +210,8 @@ module.exports = {
 	resp_out["doit_arr"]=doit;
 	resp_out["dbox_arr"]=dbox;
 
-
+    //console.log('REEEEEEEEEEEEEEEEEEEEEEESPPPPPPPPP');
+    console.log(resp_out);
     return resp_out;
   },
 

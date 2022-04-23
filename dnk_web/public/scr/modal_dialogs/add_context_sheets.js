@@ -53,9 +53,9 @@ var add_ctx_sheets_btn = document.getElementById("ctx_sheets");
 
 
 
-        request.addEventListener("add_sheet", function () {
+        request.addEventListener("load", function () {
             let doit_out_info = JSON.parse(request.response);
-            //navigator_update(moni_info.moni_name);
+            navigator_update(moni_info.moni_name);
 
             modal_content.innerHTML = '';
             modal.style.display = "none";

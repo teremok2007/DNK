@@ -24,8 +24,10 @@ $(document).ready(function()
             var node = document.getElementById(files.parent);
             dir_array=files.dir_arr;
             files_array=files.files_arr;
+            sheets_array=files.sheets;
             proj_relative_path=files.root;
             in_depth=files.depth;
+            is_fine=files.its_fin_context;
 
             var parent=document.getElementById(files.parent).dataset.id;
 
@@ -47,7 +49,9 @@ $(document).ready(function()
                 dir.dataset.open=0;
                 dir.dataset.depth=in_depth;
                 dir.dataset.select=0;
+
                 dir.innerHTML = "<div> <div class=\"space\" style=\"padding-left:"+in_depth+"px\"><\div> <img src=\"/public/icons/folder/keyboard_arrow_right-12px.svg\"> <img src=\"/public/icons/folder/folder-12px.svg\"> " + dir_in +"</div>";
+                
                 node.append(dir);
 
                 let dir_box = document.createElement('div');
@@ -70,15 +74,18 @@ $(document).ready(function()
                         //alert(parent_path);
                         folder_box.innerHTML = '';
                         this.innerHTML = "";
-                        this.innerHTML = "<div> <div class=\"space\" style=\"padding-left:"+this.dataset.depth+"px\"><\div> <img src=\"/public/icons/folder/keyboard_arrow_right-12px.svg\"> <img src=\"/public/icons/folder/folder-12px.svg\"> " + dir_in +"</div>";
 
+                        this.innerHTML = "<div> <div class=\"space\" style=\"padding-left:"+this.dataset.depth+"px\"><\div> <img src=\"/public/icons/folder/keyboard_arrow_right-12px.svg\"> <img src=\"/public/icons/folder/folder-12px.svg\"> " + dir_in +"</div>";
+                        
                         return 1;
                     }
                     else if (this.dataset.open==0) {
                         this.dataset.open=1;
                     }
                     this.innerHTML = "";
+
                     this.innerHTML = "<div> <div class=\"space\" style=\"padding-left:"+this.dataset.depth+"px\"><\div> <img src=\"/public/icons/folder/keyboard_arrow_down-12px.svg\"> <img src=\"/public/icons/folder/folder-12px.svg\"> " + dir_in +"</div>";
+
                     folder_depth=parseInt(this.dataset.depth)+12;
                     let get_dir = JSON.stringify({directory: new_path , parent_name :parent_path ,depth_folder:folder_depth});
 
@@ -88,7 +95,6 @@ $(document).ready(function()
                     request.send(get_dir);
 
                 });
-
 
 
 
@@ -131,15 +137,16 @@ $(document).ready(function()
 
                 });
 
-
-
-
-
-
-
-
-
             });
+            if (files.its_fin_context==1){
+                sheets_array.forEach(file_in => {
+                    let file = document.createElement('div');
+                    file.className = "file";
+                    file.dataset.id = file_in;
+                    file.innerHTML = "<div> <div class=\"space\" style=\"padding-left:"+in_depth+"px\"><\div> <img src=\"/public/icons/navigator/cells_x12.png\">" + file_in +"</div>";
+                    node.append(file);
+                });
+            }   
 
 
         });

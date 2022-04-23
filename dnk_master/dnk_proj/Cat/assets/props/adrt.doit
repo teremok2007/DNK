@@ -1,11 +1,11 @@
 {
     "coord": [
-        529.9945039331246,
-        469.7096595504533
+        571.1033966033983,
+        496.19635919635977
     ],
     "annotation": "",
     "inputs": [
         "[prj]export_abc",
-        "[shot]asmbl_export_abc"
+        "[ctx]anim"
     ]
 }
