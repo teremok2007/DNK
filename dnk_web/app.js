@@ -53,7 +53,18 @@ app.post("/add_doit", jsonParser, function (request, response) {
 });
 
 
+app.post("/get_sheet", jsonParser, function (request, response) {
+    if(!request.body) return response.sendStatus(400);
+    console.log(request);
+    body=request.body;
+    sheet_name=body.sheet_name;
+    ctx=body.context;
+    in_dict={"sheet_name":sheet_name, "ctx":ctx , "dnk_project_path":dnk_project_path};
+    sheet=sh_utl.get_sheet(in_dict);
+    console.log(sheet);
+    response.json(sheet);
 
+});
 
 
 

@@ -143,8 +143,20 @@ $(document).ready(function()
                     let file = document.createElement('div');
                     file.className = "file";
                     file.dataset.id = file_in;
-                    file.innerHTML = "<div> <div class=\"space\" style=\"padding-left:"+in_depth+"px\"><\div> <img src=\"/public/icons/navigator/cells_x12.png\">" + file_in +"</div>";
+                    file.innerHTML = "<div> <div class=\"space\" id=\"" +file_in+ "\" style=\"padding-left:"+in_depth+"px\"><\div> <img src=\"/public/icons/navigator/cells_x12.png\">" + file_in +"</div>";
                     node.append(file);
+
+                    file.addEventListener("dblclick",function (e){
+                        var sheet_view=document.getElementById("sheets_view");
+                        sheet_view.style.display='block';
+                        this_id=file.dataset.id;
+                        var moni_name=canvas['moni_name'];
+                        sheet_load(this_id, moni_name);
+                    });
+
+
+
+
                 });
             }   
 

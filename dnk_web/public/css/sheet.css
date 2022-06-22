@@ -1,0 +1,11 @@
+.sheets_view{
+
+    display: flex;
+    flex-direction:column;
+    background-color: #606060;
+    flex: 1 0 800px;
+    overflow:auto;
+    border: 1px solid;
+    box-shadow: 0px 0px 0px 0px #ffffff;*/
+
+}

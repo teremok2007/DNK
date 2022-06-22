@@ -10,6 +10,7 @@ $(document).ready(function()
             var user_mode = document.getElementById("user_mode");
             var delete_doit = document.getElementById("delete_doit");
             var modal = document.getElementById("base_modal");
+            var sheet_view=document.getElementById("sheets_view");
 
 
             left_win.style.display="none";
@@ -22,6 +23,7 @@ $(document).ready(function()
             modal.style.display="none";
             delete_doit.style.display="none";
             main_menu.style.display='none';
+            sheet_view.style.display='none';
 
             var btn = document.getElementById("sign_in_btr");
             let event = new Event("click");
